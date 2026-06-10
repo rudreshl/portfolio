@@ -1,0 +1,291 @@
+Create a floating voice assistant component for my Next.js 14 App Router 
+portfolio. It only appears when mode === 'voice' (set by ModeSelector). 
+Follows the existing DESIGN.md terminal OS design system exactly.
+
+---
+
+## File to create
+components/VoiceAssistant.tsx
+
+Add it at the end of components/Shell.tsx, replacing the 
+data-voice-placeholder div:
+
+import VoiceAssistant from './VoiceAssistant'
+// inside Shell JSX, at the very end before closing fragment:
+{mode === 'voice' && <VoiceAssistant />}
+
+---
+
+## Positioning
+Fixed, bottom-right of viewport:
+- Collapsed mic button: bottom-[50px] right-[20px] (sits above footer)
+- Expanded panel: bottom-[50px] right-[20px], w-[340px]
+- z-[100] so it floats above page content but below ModeSelector (z-200)
+- Never overlaps the sidebar (sidebar is w-[80px] on left)
+
+---
+
+## Two states: collapsed and expanded
+
+### Collapsed state (default)
+A single circular mic button:
+- Size: w-12 h-12
+- bg-surface-container border border-primary-fixed-dim rounded-full
+- Centered Material Symbol "mic" icon, text-primary-fixed-dim
+- Idle: terminal-glow (subtle)
+- Listening: animate-pulse + shadow-[0_0_20px_rgba(0,220,229,0.6)] 
+  + border-primary-container
+- On click: expand to panel
+- Small status dot bottom-right of button:
+  - Idle: bg-outline rounded-full w-2 h-2
+  - Listening: bg-primary-fixed-dim animate-pulse w-2 h-2
+
+### Expanded state
+A terminal card panel above the mic button:
+
+**Panel header bar** (per DESIGN.md terminal card spec):
+- bg-surface-container-high border-b border-outline-variant px-4 py-2
+- Left: Material Symbol "mic" text-primary-fixed-dim text-sm + 
+  "voice_session.sh" font-code-block text-body-sm
+- Right: 3 dot controls — close dot (w-2.5 h-2.5 rounded-full):
+  - bg-on-error-container opacity-40 (close — clicking collapses panel)
+  - bg-secondary-fixed opacity-40 (min)
+  - bg-primary-container opacity-40 (max)
+
+**Panel body**: bg-surface-container-low p-4 space-y-3
+Max height: max-h-[320px] overflow-y-auto
+
+**Transcript messages** — each message is a row:
+
+User message:
+- Prompt prefix: "guest@rudresh:~$" text-primary-fixed-dim font-bold text-xs
+- Message text: text-on-surface font-code-block text-body-sm
+- Aligned left, bg-surface-container px-3 py-2 border-l-2 border-primary-fixed-dim
+
+Assistant reply:
+- Prompt prefix: "rl_os:~$" text-secondary-fixed-dim font-bold text-xs
+- Message text: text-on-surface font-code-block text-body-sm  
+- Aligned left, bg-surface-container-high px-3 py-2 
+  border-l-2 border-secondary-fixed-dim
+
+Empty state (no messages yet):
+
+voice session initialized
+speak to navigate...
+
+text-on-surface-variant font-code-block text-xs opacity-60
+
+**Listening indicator** (shown when mic is active):
+Row at bottom of message list:
+- Animated 3-dot typing indicator using CSS (3 spans, each 
+  w-1 h-1 rounded-full bg-primary-fixed-dim, staggered 
+  animation-delay 0/200/400ms, scale 0.5→1.5 loop)
+- Text: "listening..." text-primary-fixed-dim font-label-md 
+  animate-pulse
+
+**Panel footer** (bottom of card):
+- bg-surface-container-lowest border-t border-outline-variant 
+  px-4 py-2
+- Left: waveform visual — 5 bars, each w-0.5 rounded-full 
+  bg-primary-fixed-dim, animated height (10px→30px→10px loop 
+  with staggered delays) when listening, static h-[10px] when idle
+- Right: mic toggle button — rounded-full w-8 h-8 
+  bg-primary-container text-on-primary-container when listening, 
+  bg-surface-container-high text-on-surface-variant when idle
+
+---
+
+## State management (local, no external lib)
+
+```ts
+type VoiceState = 'idle' | 'listening' | 'processing' | 'speaking'
+
+interface Message {
+  id: string
+  role: 'user' | 'assistant'
+  text: string
+  timestamp: Date
+}
+
+const [isExpanded, setIsExpanded] = useState(false)
+const [voiceState, setVoiceState] = useState<VoiceState>('idle')
+const [messages, setMessages] = useState<Message[]>([])
+const [transcript, setTranscript] = useState('')
+```
+
+---
+
+## Voice capture (Web Speech API — no external packages)
+
+```ts
+const recognitionRef = useRef<SpeechRecognition | null>(null)
+
+useEffect(() => {
+  if (typeof window === 'undefined') return
+  const SpeechRecognition = 
+    window.SpeechRecognition || window.webkitSpeechRecognition
+  if (!SpeechRecognition) return
+  
+  const recognition = new SpeechRecognition()
+  recognition.continuous = false
+  recognition.interimResults = true
+  recognition.lang = 'en-US'
+  
+  recognition.onresult = (event) => {
+    const current = Array.from(event.results)
+      .map(r => r[0].transcript)
+      .join('')
+    setTranscript(current)
+    if (event.results[event.results.length - 1].isFinal) {
+      handleUserSpeech(current)
+    }
+  }
+  
+  recognition.onend = () => {
+    if (voiceState === 'listening') setVoiceState('idle')
+  }
+  
+  recognitionRef.current = recognition
+}, [])
+
+const startListening = () => {
+  recognitionRef.current?.start()
+  setVoiceState('listening')
+  setIsExpanded(true)
+}
+
+const stopListening = () => {
+  recognitionRef.current?.stop()
+  setVoiceState('idle')
+}
+```
+
+---
+
+## Intent handling + navigation (no LLM yet — keyword matching)
+
+```ts
+import { useRouter } from 'next/navigation'
+
+const router = useRouter()
+
+const handleUserSpeech = (text: string) => {
+  const lower = text.toLowerCase()
+  
+  // Add user message to transcript
+  addMessage('user', text)
+  setVoiceState('processing')
+  
+  // Intent map
+  let reply = ''
+  
+  if (lower.includes('home') || lower.includes('start')) {
+    router.push('/')
+    reply = 'Navigating to home.'
+  } else if (lower.includes('about')) {
+    router.push('/about')
+    reply = 'Opening about section.'
+  } else if (lower.includes('skill')) {
+    router.push('/skills')
+    reply = 'Loading skills and tools.'
+  } else if (lower.includes('project')) {
+    router.push('/projects')
+    reply = 'Opening projects gallery.'
+  } else if (lower.includes('experience') || lower.includes('work')) {
+    router.push('/experience')
+    reply = 'Showing experience timeline.'
+  } else if (lower.includes('contact') || lower.includes('hire') 
+             || lower.includes('email')) {
+    router.push('/contact')
+    reply = 'Opening contact terminal.'
+  } else if (lower.includes('resume') || lower.includes('cv')) {
+    reply = 'Resume download is on the home page.'
+  } else {
+    reply = "I didn't catch that. Try saying a page name like 'projects' or 'contact'."
+  }
+  
+  // Add assistant reply after short delay
+  setTimeout(() => {
+    addMessage('assistant', reply)
+    speakReply(reply)
+    setVoiceState('idle')
+  }, 400)
+}
+
+const addMessage = (role: 'user' | 'assistant', text: string) => {
+  setMessages(prev => [...prev, {
+    id: Date.now().toString(),
+    role,
+    text,
+    timestamp: new Date()
+  }])
+}
+```
+
+---
+
+## TTS reply (Web Speech API — no external packages)
+
+```ts
+const speakReply = (text: string) => {
+  if (typeof window === 'undefined') return
+  const utterance = new SpeechSynthesisUtterance(text)
+  utterance.rate = 1.0
+  utterance.pitch = 1.0
+  utterance.volume = 0.9
+  setVoiceState('speaking')
+  utterance.onend = () => setVoiceState('idle')
+  window.speechSynthesis.speak(utterance)
+}
+```
+
+---
+
+## Auto-scroll transcript
+
+```ts
+const messagesEndRef = useRef<HTMLDivElement>(null)
+useEffect(() => {
+  messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+}, [messages])
+// Add <div ref={messagesEndRef} /> at bottom of message list
+```
+
+---
+
+## Keyboard shortcut
+Add global keydown listener in useEffect:
+- Press Space when panel is closed → startListening() + expand
+- Press Escape → stopListening() + collapse
+- Clean up listener on unmount
+
+---
+
+## TypeScript — add SpeechRecognition types
+At top of file:
+```ts
+declare global {
+  interface Window {
+    SpeechRecognition: typeof SpeechRecognition
+    webkitSpeechRecognition: typeof SpeechRecognition
+  }
+}
+```
+
+---
+
+## Design rules checklist (from DESIGN.md)
+- [ ] rounded-none on panel card container
+- [ ] rounded-full on mic button only
+- [ ] No drop shadows — only terminal-glow + cyan glow on active state
+- [ ] CLI prompt prefixes on all messages (guest@rudresh:~$ and rl_os:~$)
+- [ ] border-l-2 cyan/purple on message rows (matches terminal card style)
+- [ ] Waveform bars animated when listening
+- [ ] 3-dot typing indicator when processing
+- [ ] Material Symbols icons (mic, already loaded)
+- [ ] JetBrains Mono for all text
+- [ ] Zero new npm packages — Web Speech API only
+- [ ] SSR safe — all speech API calls inside useEffect or 
+      typeof window checks
+- [ ] Collapse on Escape key
+- [ ] Auto-scroll to latest message

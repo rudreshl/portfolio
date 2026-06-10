@@ -240,6 +240,17 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* ModeSelector animations */
+@keyframes mode-boot-line {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mode-slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* DESIGN.md — Input Fields: bottom border only, cyan on focus */
 .terminal-input {
   background: transparent;

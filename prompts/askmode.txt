@@ -1,0 +1,184 @@
+Create a mode selection splash screen that appears when the user first visits 
+the portfolio. It asks whether they want Voice Assistant mode or Traditional 
+browsing mode. This must feel native to the existing terminal OS design system.
+
+---
+
+## Files to create
+- components/ModeSelector.tsx   ← the splash UI
+- hooks/usePortfolioMode.ts     ← stores and reads the mode choice
+
+---
+
+## Behavior
+
+On first visit to "/" (home page only):
+- Show the ModeSelector fullscreen overlay before any content loads
+- Once user picks a mode, store it in localStorage key "rl_portfolio_mode"
+- Value is either "voice" or "traditional"
+- Never show the splash again on subsequent visits or page navigations
+- If localStorage already has a value, skip splash entirely and go straight 
+  to the site
+
+If user picks "traditional" → dismiss overlay, show site normally, 
+  VoiceAssistant component stays hidden forever for this session
+If user picks "voice" → dismiss overlay, show site, VoiceAssistant 
+  component becomes visible and auto-opens
+
+---
+
+## hooks/usePortfolioMode.ts
+
+```ts
+'use client'
+import { useState, useEffect } from 'react'
+
+type Mode = 'voice' | 'traditional' | null
+
+export function usePortfolioMode() {
+  const [mode, setMode] = useState<Mode>(null)
+  const [isDecided, setIsDecided] = useState(false)
+
+  useEffect(() => {
+    const stored = localStorage.getItem('rl_portfolio_mode') as Mode
+    if (stored === 'voice' || stored === 'traditional') {
+      setMode(stored)
+      setIsDecided(true)
+    }
+  }, [])
+
+  const chooseMode = (chosen: 'voice' | 'traditional') => {
+    localStorage.setItem('rl_portfolio_mode', chosen)
+    setMode(chosen)
+    setIsDecided(true)
+  }
+
+  const resetMode = () => {
+    localStorage.removeItem('rl_portfolio_mode')
+    setMode(null)
+    setIsDecided(false)
+  }
+
+  return { mode, isDecided, chooseMode, resetMode }
+}
+```
+
+---
+
+## components/ModeSelector.tsx
+
+'use client' component.
+
+### Layout
+Fullscreen fixed overlay, z-[200], bg-surface-container-lowest with 
+grid-bg pattern, centered content.
+
+Structured as a terminal card (per DESIGN.md terminal card spec):
+- 0px border radius (rounded-none)
+- Window header bar: filename "init_session.sh" top-left, 3 dot controls top-right
+- border border-outline-variant
+- terminal-glow shadow
+
+### Boot sequence (visual only, no real delay logic needed — use CSS animations)
+Show these lines staggered with opacity-0 → opacity-100 transitions, 
+each 200ms apart:
+
+Initializing RL_OS v1.0.4...
+Loading kernel modules...
+Mounting filesystem...
+Detecting input devices...
+System ready.
+
+
+Each line: font-code-block text-on-surface-variant, with text-primary-fixed-dim 
+prompt character ">"
+
+After boot lines appear, show the choice section below them.
+
+### Choice section
+
+Heading:
+Select interface mode_
+font-headline-md text-primary with .cursor-blink span at end
+
+Subtext:
+guest@rudresh:~$ awaiting input...
+text-on-surface-variant font-code-block
+
+Two option cards side by side (stacked on mobile), each is a terminal 
+sub-card with border border-outline-variant bg-surface-container p-6:
+
+**Card 1 — Voice Mode**
+- Icon: Material Symbol "mic" large, text-primary-fixed-dim
+- Title: "> voice_mode.sh" font-label-md text-primary-fixed-dim font-bold
+- Description: "Navigate by speaking. AI assistant guides you through the portfolio."
+  text-on-surface-variant font-body-sm
+- Badge: "--hands-free" using brand-container bg + primary-container border + 
+  rounded-full (CLI badge per DESIGN.md)
+- On hover: border-primary-fixed-dim + terminal-glow
+- On click: calls chooseMode('voice')
+
+**Card 2 — Traditional Mode**  
+- Icon: Material Symbol "mouse" large, text-secondary-fixed-dim
+- Title: "> traditional_mode.sh" font-label-md text-secondary-fixed-dim font-bold
+- Description: "Classic browsing. Click and scroll through the portfolio."
+  text-on-surface-variant font-body-sm
+- Badge: "--standard-ui" using brand-container bg + secondary-fixed-dim border + 
+  rounded-full
+- On hover: border-secondary-fixed-dim + shadow-[0_0_12px_rgba(221,183,255,0.3)]
+- On click: calls chooseMode('traditional')
+
+Below cards, small reset hint text:
+// mode can be reset anytime via settings
+font-label-md text-on-surface-variant opacity-40
+
+### Animation
+- Entire overlay fades in: opacity-0 → opacity-100 over 300ms on mount
+- On mode chosen: overlay fades out opacity-100 → opacity-0 over 300ms, 
+  then unmounts
+- Boot lines stagger in using CSS animation-delay (0ms, 200ms, 400ms, 
+  600ms, 800ms)
+- Choice cards slide up: translate-y-4 → translate-y-0 + opacity-0 → 
+  opacity-100, after boot lines finish (1200ms delay)
+
+### Props
+```ts
+interface ModeSelectorProps {
+  onModeSelected: (mode: 'voice' | 'traditional') => void
+}
+```
+
+---
+
+## Wire it into app/page.tsx
+
+In app/page.tsx (home page only):
+- Import usePortfolioMode and ModeSelector
+- If !isDecided → render <ModeSelector onModeSelected={chooseMode} /> 
+  as a fullscreen overlay above everything
+- If isDecided → render normal page content
+- Pass mode down or use the hook wherever VoiceAssistant needs to read it
+
+---
+
+## Wire it into components/Shell.tsx
+
+In Shell.tsx:
+- Import usePortfolioMode
+- Read mode from the hook
+- Pass mode === 'voice' as a prop to VoiceAssistant component
+  (we will build VoiceAssistant in the next step)
+- For now just add: {mode === 'voice' && <div data-voice-placeholder />}
+
+---
+
+## Design rules checklist (from DESIGN.md)
+- [ ] rounded-none on all card containers
+- [ ] No drop shadows — only terminal-glow (cyan glow) or purple glow
+- [ ] CLI badges are rounded-full with --flag-name format
+- [ ] All buttons/options prefixed with > prompt character
+- [ ] JetBrains Mono for all text (already in globals.css)
+- [ ] grid-bg on overlay background
+- [ ] cursor-blink on the heading
+- [ ] Material Symbols icons (already loaded in globals.css)
+- [ ] Zero new npm packages

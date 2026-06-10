@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { usePortfolioMode } from '@/hooks/usePortfolioMode'
 
 const navItems = [
   { icon: 'home', label: 'Home', href: '/' },
@@ -26,6 +27,7 @@ const allTabs = ['main.sh', 'about.md', 'skills.json', 'projects.sh', 'git.log',
 export default function Shell() {
   const pathname = usePathname()
   const activeTab = tabMap[pathname] ?? 'main.sh'
+  const { mode } = usePortfolioMode()
 
   return (
     <>
@@ -90,6 +92,8 @@ export default function Shell() {
           <span className="material-symbols-outlined text-[18px] text-error cursor-pointer hover:bg-error-container p-1">close</span>
         </div>
       </header>
+
+      {mode === 'voice' && <div data-voice-placeholder />}
 
       {/* Footer status bar */}
       <footer className="fixed bottom-0 right-0 w-[calc(100%-80px)] h-[30px] border-t border-outline-variant bg-surface-container-lowest flex items-center justify-between px-gutter z-40">
