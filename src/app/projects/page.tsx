@@ -61,7 +61,7 @@ const projects = [
 
 export default function ProjectsPage() {
   return (
-    <main className="ml-[80px] mt-[40px] mb-[30px] p-10 min-h-[calc(100vh-70px)] bg-surface-dim relative overflow-hidden">
+    <main className="mt-[60px] mb-[30px] p-10 min-h-[calc(100vh-90px)] bg-surface-dim relative overflow-hidden">
       {/* Background Decoration */}
       <div className="absolute top-20 right-20 opacity-5 pointer-events-none">
         <span className="font-headline-lg text-[120px] select-none">PROJECTS.EXE</span>

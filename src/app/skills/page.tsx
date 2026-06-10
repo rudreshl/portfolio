@@ -27,7 +27,7 @@ export default function SkillsPage() {
   ]
 
   return (
-    <main className="ml-[80px] pt-[40px] pb-[30px] min-h-screen grid-bg-sm">
+    <main className="pt-[60px] pb-[30px] min-h-screen grid-bg-sm">
       <div className="max-w-container-max mx-auto p-margin-desktop space-y-12">
         {/* Page Header */}
         <section className="border-b border-outline-variant pb-gutter">

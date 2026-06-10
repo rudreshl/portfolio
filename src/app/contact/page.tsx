@@ -18,7 +18,7 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="ml-[80px] mt-[40px] mb-[30px] flex-grow flex items-center justify-center p-gutter min-h-[calc(100vh-70px)]">
+    <main className="mt-[60px] mb-[30px] flex-grow flex items-center justify-center p-gutter min-h-[calc(100vh-90px)]">
       <div className="max-w-2xl w-full">
         {/* Terminal Card */}
         <div className="border border-outline-variant bg-surface-container-low terminal-glow overflow-hidden">

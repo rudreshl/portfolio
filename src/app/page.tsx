@@ -12,7 +12,7 @@ export default function HeroPage() {
       {!isDecided && <ModeSelector onModeSelected={chooseMode} />}
       <div className="scanline" />
       <div className="fixed inset-0 grid-bg z-0 pointer-events-none" />
-      <main className="ml-[80px] pt-[40px] pb-[30px] h-screen flex items-center justify-center p-gutter relative z-10">
+      <main className="pt-[60px] pb-[30px] h-screen flex items-center justify-center p-gutter relative z-10">
         {/* Terminal Window Frame */}
         <div className="max-w-[1000px] w-full border border-outline-variant bg-surface-container shadow-2xl overflow-hidden">
           {/* Window Header */}

@@ -13,7 +13,7 @@ function DefaultFallback({
   return (
     <div className="flex min-h-[200px] flex-col items-center justify-center gap-4 rounded-lg border border-destructive/30 bg-destructive/5 p-6 text-center">
       <p className="text-sm font-medium text-destructive">Something went wrong</p>
-      <p className="max-w-sm text-xs text-muted-foreground">{error.message}</p>
+      <p className="max-w-sm text-xs text-muted-foreground">{error instanceof Error ? error.message : String(error)}</p>
       <Button variant="outline" size="sm" onClick={resetErrorBoundary}>
         Try again
       </Button>
