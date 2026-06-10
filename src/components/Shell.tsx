@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { usePortfolioMode } from '@/hooks/usePortfolioMode'
+import VoiceAssistant from './VoiceAssistant'
 
 const navItems = [
   { icon: 'home', label: 'Home', href: '/' },
@@ -93,7 +94,7 @@ export default function Shell() {
         </div>
       </header>
 
-      {mode === 'voice' && <div data-voice-placeholder />}
+      {mode === 'voice' && <VoiceAssistant />}
 
       {/* Footer status bar */}
       <footer className="fixed bottom-0 right-0 w-[calc(100%-80px)] h-[30px] border-t border-outline-variant bg-surface-container-lowest flex items-center justify-between px-gutter z-40">
