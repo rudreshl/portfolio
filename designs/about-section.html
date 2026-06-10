@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RL_OS - About</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#dfe2eb",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "primary-fixed": "#63f7ff",
+                        "on-tertiary-fixed-variant": "#35476a",
+                        "secondary-container": "#6f00be",
+                        "inverse-primary": "#00696e",
+                        "on-secondary": "#490080",
+                        "tertiary-fixed-dim": "#b4c7f0",
+                        "primary-container": "#00f5ff",
+                        "surface-container-high": "#262a31",
+                        "error": "#ffb4ab",
+                        "surface": "#10141a",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#31353c",
+                        "surface-tint": "#00dce5",
+                        "primary": "#e9feff",
+                        "on-background": "#dfe2eb",
+                        "on-primary-fixed": "#002021",
+                        "surface-container": "#1c2026",
+                        "surface-bright": "#353940",
+                        "on-primary-fixed-variant": "#004f53",
+                        "outline": "#849495",
+                        "surface-container-low": "#181c22",
+                        "surface-container-lowest": "#0a0e14",
+                        "on-tertiary-fixed": "#051b3c",
+                        "inverse-on-surface": "#2d3137",
+                        "on-tertiary-container": "#4f6186",
+                        "on-tertiary": "#1d3052",
+                        "tertiary-fixed": "#d8e2ff",
+                        "secondary": "#ddb7ff",
+                        "on-primary-container": "#006c71",
+                        "surface-dim": "#10141a",
+                        "surface-variant": "#31353c",
+                        "on-secondary-container": "#d6a9ff",
+                        "tertiary-container": "#d0ddff",
+                        "error-container": "#93000a",
+                        "background": "#10141a",
+                        "on-surface": "#dfe2eb",
+                        "primary-fixed-dim": "#00dce5",
+                        "outline-variant": "#3a494a",
+                        "tertiary": "#faf9ff",
+                        "on-surface-variant": "#b9caca",
+                        "on-primary": "#003739",
+                        "secondary-fixed": "#f0dbff",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "on-secondary-fixed": "#2c0051"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter": "20px",
+                        "grid-unit": "10px",
+                        "margin-mobile": "16px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["JetBrains Mono"],
+                        "code-block": ["JetBrains Mono"],
+                        "headline-lg": ["JetBrains Mono"],
+                        "body-lg": ["JetBrains Mono"],
+                        "body-sm": ["JetBrains Mono"],
+                        "label-md": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "code-block": ["14px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0D1117;
+            background-image: radial-gradient(#1c2026 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+    </style>
+</head>
+<body class="font-body-sm text-on-surface selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<aside class="fixed left-0 top-0 h-full w-[80px] border-r border-outline-variant bg-surface-container-low flex flex-col items-center py-grid-unit z-50">
+<div class="mb-10 mt-4">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">RL</span>
+</div>
+<nav class="flex flex-col gap-6 w-full">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-150 cursor-pointer group">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim border-l-2 border-primary shadow-[0_0_12px_rgba(0,220,229,0.3)] bg-surface-container-highest/30 py-2">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">About</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-150 cursor-pointer">
+<span class="material-symbols-outlined">terminal</span>
+<span class="font-label-md text-label-md mt-1">Skills</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-150 cursor-pointer">
+<span class="material-symbols-outlined">code</span>
+<span class="font-label-md text-label-md mt-1">Projects</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-150 cursor-pointer">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-md text-label-md mt-1">Exp</span>
+</div>
+</nav>
+<div class="mt-auto flex flex-col gap-6 pb-6">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">settings</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">keyboard_arrow_right</span>
+</div>
+</aside>
+<header class="fixed top-0 right-0 w-[calc(100%-80px)] h-[40px] border-b border-outline-variant bg-surface-container-high flex items-center justify-between px-gutter z-40">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">~/rudresh_portfolio</span>
+<div class="flex items-center gap-2 ml-4">
+<span class="font-label-md text-label-md text-primary font-bold">about.md</span>
+<span class="font-label-md text-label-md text-on-surface-variant">skills.json</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] cursor-pointer hover:text-primary">minimize</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] cursor-pointer hover:text-primary">fullscreen</span>
+<span class="material-symbols-outlined text-error text-[18px] cursor-pointer hover:opacity-80">close</span>
+</div>
+</header>
+<main class="ml-[80px] pt-[40px] pb-[30px] h-screen overflow-y-auto">
+<section class="max-w-container-max mx-auto px-margin-desktop py-margin-desktop">
+<div class="border border-outline-variant bg-surface-container-low overflow-hidden rounded-lg">
+<div class="bg-surface-container-high px-4 py-2 flex items-center justify-between border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">description</span>
+<span class="font-code-block text-code-block text-on-surface-variant">profile_summary.sh</span>
+</div>
+<div class="flex gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+<div class="p-8 md:p-12 grid grid-cols-1 md:grid-cols-12 gap-10">
+<div class="md:col-span-4 flex flex-col items-center md:items-start space-y-6">
+<div class="relative group">
+<div class="w-48 h-48 bg-surface-container-highest border-2 border-primary-fixed-dim flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(0,220,229,0.15)] transition-all group-hover:shadow-[0_0_30px_rgba(0,220,229,0.3)]">
+<img alt="Rudresh Lagwankar" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A professional portrait of a software engineer with a modern tech aesthetic. The lighting is dramatic and cinematic, featuring cool blue and cyan highlights against a dark charcoal background. The subject is wearing a sleek, minimalist tech-wear jacket. The image has a sharp, high-resolution finish with subtle digital scanline overlays to match a cyberpunk minimalist personal OS interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIM3G3bZEDaRLpQHdUXmwU3Bp9Fuvvai6qsFmU34CiJoZi7IMjiWEMMjop-BsjjJTb7sKDl1mw2nswuRiZz3awCMBNE0eizE2GNaQbOSqLT9TPgiJ8GMV9NSoZEBMZvH4-jjaDhk-CKZ2CkG7HUVsoNmhjDFxrN4qCvUk1OP5A3u2wPfUv3msfQ-yO-6CUX5btPUSi3qBenD3eJKnS6NuicHthy8Fy-HzObgEQ_bZkj4xni9uWKF9ro26iLndSHe9SyWHhXcEswAqI"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary-container text-on-primary-container px-3 py-1 font-code-block text-[10px] font-bold">
+                                ACTIVE_SESSION
+                            </div>
+</div>
+<div class="space-y-4 w-full text-center md:text-left">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter">Rudresh Lagwankar<span class="cursor-blink">█</span></h1>
+<p class="font-code-block text-secondary-fixed-dim text-lg mt-1">&gt; Software Engineer</p>
+</div>
+<div class="space-y-2 pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-3 justify-center md:justify-start">
+<span class="font-code-block text-on-surface-variant text-xs">COMPANY:</span>
+<span class="font-code-block text-primary-fixed bg-on-primary-fixed-variant/30 px-2 py-0.5 rounded border border-primary-fixed-dim/20">Valueadd Softtech</span>
+</div>
+<div class="flex items-center gap-3 justify-center md:justify-start">
+<span class="font-code-block text-on-surface-variant text-xs">TENURE:</span>
+<span class="font-code-block text-on-surface">Dec 2020 – Present</span>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-8 space-y-8">
+<div class="bg-surface-container-lowest p-6 border border-outline-variant/50 relative">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary shadow-[0_0_10px_rgba(0,220,229,0.5)]"></div>
+<p class="font-body-lg text-body-lg leading-relaxed text-on-surface">
+                                Software Engineer with 5+ years across marketplace platforms, trade compliance, real estate, and university management systems. Skilled in Frontend development, GenAI integrations, and full-stack design using React.js, Next.js, NestJS, Node.js, JavaScript, and Java (Spring Boot). Passionate about AI-driven solutions and intelligent systems.
+                            </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="border border-outline-variant p-4 hover:bg-surface-container-highest/50 transition-colors">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-secondary text-sm">terminal</span>
+<h3 class="font-headline-md text-[16px] text-secondary">Tech Stack</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-high border border-outline-variant font-code-block text-[11px] text-on-surface-variant">--react.js</span>
+<span class="px-2 py-1 bg-surface-container-high border border-outline-variant font-code-block text-[11px] text-on-surface-variant">--next.js</span>
+<span class="px-2 py-1 bg-surface-container-high border border-outline-variant font-code-block text-[11px] text-on-surface-variant">--nestjs</span>
+<span class="px-2 py-1 bg-surface-container-high border border-outline-variant font-code-block text-[11px] text-on-surface-variant">--spring-boot</span>
+<span class="px-2 py-1 bg-surface-container-high border border-outline-variant font-code-block text-[11px] text-on-surface-variant">--genai</span>
+</div>
+</div>
+<div class="border border-outline-variant p-4 hover:bg-surface-container-highest/50 transition-colors">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm">architecture</span>
+<h3 class="font-headline-md text-[16px] text-primary-fixed-dim">Focus</h3>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 bg-primary-fixed-dim rounded-full"></div>
+<span class="font-code-block text-[12px] text-on-surface">Intelligent Systems</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 bg-primary-fixed-dim rounded-full"></div>
+<span class="font-code-block text-[12px] text-on-surface">Scale Architectures</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<button class="bg-primary-container text-on-primary-container font-code-block font-bold py-3 px-8 hover:shadow-[0_0_15px_rgba(0,245,255,0.4)] transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                                &gt; fetch_resume.pdf
+                            </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest px-6 py-3 border-t border-outline-variant flex justify-between items-center">
+<div class="flex gap-4">
+<span class="font-label-md text-label-md text-on-tertiary-container">Status: STABLE</span>
+<span class="font-label-md text-label-md text-on-tertiary-container">Branch: main*</span>
+</div>
+<div class="flex gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] cursor-pointer hover:text-primary">share</span>
+<span class="material-symbols-outlined text-[16px] cursor-pointer hover:text-primary">bug_report</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="fixed bottom-0 right-0 w-[calc(100%-80px)] h-[30px] border-t border-outline-variant bg-surface-container-lowest flex items-center justify-between px-gutter z-40">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md text-on-surface">© 2024 Rudresh Lagwankar</span>
+<div class="h-3 w-[1px] bg-outline-variant"></div>
+<span class="font-label-md text-label-md text-secondary hover:text-primary transition-colors cursor-pointer">Available for Hire <span class="cursor-blink">_</span></span>
+</div>
+<div class="flex items-center gap-6">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">fork_right</span>
+                Git:main
+            </span>
+<span class="font-label-md text-label-md text-on-surface-variant">UTF-8</span>
+</div>
+</footer>
+</body></html>

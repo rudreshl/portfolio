@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#ffdad6",
+                    "inverse-surface": "#dfe2eb",
+                    "on-secondary-fixed-variant": "#6900b3",
+                    "primary-fixed": "#63f7ff",
+                    "on-tertiary-fixed-variant": "#35476a",
+                    "secondary-container": "#6f00be",
+                    "inverse-primary": "#00696e",
+                    "on-secondary": "#490080",
+                    "tertiary-fixed-dim": "#b4c7f0",
+                    "primary-container": "#00f5ff",
+                    "surface-container-high": "#262a31",
+                    "error": "#ffb4ab",
+                    "surface": "#10141a",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#31353c",
+                    "surface-tint": "#00dce5",
+                    "primary": "#e9feff",
+                    "on-background": "#dfe2eb",
+                    "on-primary-fixed": "#002021",
+                    "surface-container": "#1c2026",
+                    "surface-bright": "#353940",
+                    "on-primary-fixed-variant": "#004f53",
+                    "outline": "#849495",
+                    "surface-container-low": "#181c22",
+                    "surface-container-lowest": "#0a0e14",
+                    "on-tertiary-fixed": "#051b3c",
+                    "inverse-on-surface": "#2d3137",
+                    "on-tertiary-container": "#4f6186",
+                    "on-tertiary": "#1d3052",
+                    "tertiary-fixed": "#d8e2ff",
+                    "secondary": "#ddb7ff",
+                    "on-primary-container": "#006c71",
+                    "surface-dim": "#10141a",
+                    "surface-variant": "#31353c",
+                    "on-secondary-container": "#d6a9ff",
+                    "tertiary-container": "#d0ddff",
+                    "error-container": "#93000a",
+                    "background": "#10141a",
+                    "on-surface": "#dfe2eb",
+                    "primary-fixed-dim": "#00dce5",
+                    "outline-variant": "#3a494a",
+                    "tertiary": "#faf9ff",
+                    "on-surface-variant": "#b9caca",
+                    "on-primary": "#003739",
+                    "secondary-fixed": "#f0dbff",
+                    "secondary-fixed-dim": "#ddb7ff",
+                    "on-secondary-fixed": "#2c0051"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "gutter": "20px",
+                    "grid-unit": "10px",
+                    "margin-mobile": "16px",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "headline-md": ["JetBrains Mono"],
+                    "code-block": ["JetBrains Mono"],
+                    "headline-lg": ["JetBrains Mono"],
+                    "body-lg": ["JetBrains Mono"],
+                    "body-sm": ["JetBrains Mono"],
+                    "label-md": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "code-block": ["14px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #10141a;
+            background-image: 
+                linear-gradient(rgba(0, 220, 229, 0.03) 1px, transparent 1px),
+                linear-gradient(90px, rgba(0, 220, 229, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .terminal-glow-cyan {
+            box-shadow: 0 0 12px rgba(0, 220, 229, 0.2);
+        }
+        .terminal-glow-purple {
+            box-shadow: 0 0 12px rgba(221, 183, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="font-body-sm text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Activity Bar (SideNavBar) -->
+<aside class="fixed left-0 top-0 h-full w-[80px] border-r border-outline-variant bg-surface-container-low flex flex-col items-center py-grid-unit z-50">
+<div class="mb-8 mt-2">
+<span class="font-headline-md text-headline-md font-bold text-primary-fixed-dim">RL</span>
+</div>
+<nav class="flex flex-col gap-4 w-full px-2">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 p-2 rounded" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 p-2 rounded" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-[10px] mt-1">About</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary-fixed-dim border-l-2 border-primary-fixed-dim shadow-[0_0_12px_rgba(0,220,229,0.3)] bg-surface-container-highest p-2" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span class="font-label-md text-[10px] mt-1">Skills</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 p-2 rounded" href="#">
+<span class="material-symbols-outlined">code</span>
+<span class="font-label-md text-[10px] mt-1">Projects</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 p-2 rounded" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-md text-[10px] mt-1">Experience</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-4 w-full px-2">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim transition-all p-2" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim transition-all p-2" href="#">
+<span class="material-symbols-outlined">keyboard_arrow_right</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation (TopAppBar) -->
+<header class="fixed top-0 right-0 w-[calc(100%-80px)] h-[40px] border-b border-outline-variant bg-surface-container-high flex items-center justify-between px-gutter z-40">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-on-surface">~/rudresh_portfolio</span>
+<div class="h-4 w-px bg-outline-variant"></div>
+<nav class="flex gap-4">
+<span class="font-label-md text-on-surface-variant hover:text-primary-fixed-dim cursor-pointer transition-opacity active:opacity-80">main.sh</span>
+<span class="font-label-md text-on-surface-variant hover:text-primary-fixed-dim cursor-pointer transition-opacity active:opacity-80">about.md</span>
+<span class="font-label-md text-primary-fixed-dim font-bold cursor-pointer transition-opacity active:opacity-80">skills.json</span>
+</nav>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant cursor-pointer hover:bg-surface-bright p-1">minimize</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant cursor-pointer hover:bg-surface-bright p-1">fullscreen</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant cursor-pointer hover:bg-surface-bright p-1">close</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[80px] pt-[40px] pb-[30px] min-h-screen">
+<div class="max-w-container-max mx-auto p-margin-desktop space-y-12">
+<!-- Page Header -->
+<section class="border-b border-outline-variant pb-gutter">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">
+                    system_capabilities.config<span class="text-primary-fixed-dim cursor-blink">█</span>
+</h1>
+<p class="font-body-lg text-on-surface-variant mt-2 max-w-2xl">
+                    Defining the architectural boundaries and operational stack for <span class="text-primary-fixed-dim">Rudresh Lagwankar</span>. 
+                    Optimizing for performance, scalability, and AI-driven workflows.
+                </p>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Skills Section (Cyan) -->
+<div class="md:col-span-12 lg:col-span-7">
+<div class="bg-surface-container rounded-lg border border-outline-variant overflow-hidden">
+<!-- Terminal Header -->
+<div class="bg-surface-container-high px-4 py-2 flex items-center justify-between border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm">terminal</span>
+<span class="font-label-md text-on-surface">skills_manifest.json</span>
+</div>
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+<!-- Terminal Content -->
+<div class="p-gutter space-y-6">
+<div class="flex items-center gap-3">
+<span class="text-on-surface-variant">guest@rudresh:~$</span>
+<span class="font-code-block text-primary-fixed-dim">list-skills --all</span>
+</div>
+<div class="flex flex-wrap gap-3">
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--JavaScript/TypeScript</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--React JS / Next JS</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--Node JS</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--Nest JS</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--Java / Spring Boot</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--PostgreSQL</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--MongoDB</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--Docker basics</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--Vibe coding</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--Ollama / Hugging Face</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--AI Workflow</span>
+<span class="px-3 py-1 bg-surface-container-highest border border-primary-fixed-dim text-primary-fixed-dim rounded-full terminal-glow-cyan font-code-block text-sm">--n8n</span>
+</div>
+<div class="flex items-center gap-2 pt-4">
+<span class="text-on-surface-variant">guest@rudresh:~$</span>
+<span class="w-2 h-5 bg-primary-fixed-dim cursor-blink"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tools Section (Purple) -->
+<div class="md:col-span-12 lg:col-span-5">
+<div class="bg-surface-container rounded-lg border border-outline-variant overflow-hidden">
+<!-- Terminal Header -->
+<div class="bg-surface-container-high px-4 py-2 flex items-center justify-between border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">construction</span>
+<span class="font-label-md text-on-surface">tools_inventory.yml</span>
+</div>
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+<!-- Terminal Content -->
+<div class="p-gutter space-y-6">
+<div class="flex items-center gap-3">
+<span class="text-on-surface-variant">guest@rudresh:~$</span>
+<span class="font-code-block text-secondary">inspect-toolchain --installed</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<span class="px-3 py-1.5 bg-surface-container-highest border border-secondary/30 text-secondary rounded-lg terminal-glow-purple font-code-block text-xs flex items-center gap-2">
+<span class="text-[10px] opacity-60">#</span> --Claude Code
+                                </span>
+<span class="px-3 py-1.5 bg-surface-container-highest border border-secondary/30 text-secondary rounded-lg terminal-glow-purple font-code-block text-xs flex items-center gap-2">
+<span class="text-[10px] opacity-60">#</span> --Cursor AI
+                                </span>
+<span class="px-3 py-1.5 bg-surface-container-highest border border-secondary/30 text-secondary rounded-lg terminal-glow-purple font-code-block text-xs flex items-center gap-2">
+<span class="text-[10px] opacity-60">#</span> --Augment
+                                </span>
+<span class="px-3 py-1.5 bg-surface-container-highest border border-secondary/30 text-secondary rounded-lg terminal-glow-purple font-code-block text-xs flex items-center gap-2">
+<span class="text-[10px] opacity-60">#</span> --Vercel v0
+                                </span>
+<span class="px-3 py-1.5 bg-surface-container-highest border border-secondary/30 text-secondary rounded-lg terminal-glow-purple font-code-block text-xs flex items-center gap-2">
+<span class="text-[10px] opacity-60">#</span> --Deployment
+                                </span>
+<span class="px-3 py-1.5 bg-surface-container-highest border border-secondary/30 text-secondary rounded-lg terminal-glow-purple font-code-block text-xs flex items-center gap-2">
+<span class="text-[10px] opacity-60">#</span> --Postman
+                                </span>
+<span class="px-3 py-1.5 bg-surface-container-highest border border-secondary/30 text-secondary rounded-lg terminal-glow-purple font-code-block text-xs flex items-center gap-2">
+<span class="text-[10px] opacity-60">#</span> --Jira
+                                </span>
+<span class="px-3 py-1.5 bg-surface-container-highest border border-secondary/30 text-secondary rounded-lg terminal-glow-purple font-code-block text-xs flex items-center gap-2">
+<span class="text-[10px] opacity-60">#</span> --Git
+                                </span>
+<span class="px-3 py-1.5 bg-surface-container-highest border border-secondary/30 text-secondary rounded-lg terminal-glow-purple font-code-block text-xs flex items-center gap-2 col-span-2">
+<span class="text-[10px] opacity-60">#</span> --Figma Design Suite
+                                </span>
+</div>
+<div class="flex items-center gap-2 pt-4">
+<span class="text-on-surface-variant">guest@rudresh:~$</span>
+<span class="w-2 h-5 bg-secondary cursor-blink"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- System Info (Asymmetric Decorative Card) -->
+<div class="md:col-span-12">
+<div class="bg-surface-container-low border border-outline-variant p-gutter rounded-lg relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px]">info</span>
+</div>
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div>
+<h3 class="font-label-md text-primary-fixed-dim uppercase mb-2">Primary Directive</h3>
+<p class="text-on-surface-variant font-code-block text-sm">Building software that bridges the gap between high-level AI workflows and low-level system stability.</p>
+</div>
+<div>
+<h3 class="font-label-md text-secondary uppercase mb-2">Current Focus</h3>
+<p class="text-on-surface-variant font-code-block text-sm">Optimizing local LLM deployment through Ollama and custom n8n automation architectures.</p>
+</div>
+<div>
+<h3 class="font-label-md text-on-surface uppercase mb-2">System Status</h3>
+<div class="flex items-center gap-2 mt-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-green-500 font-code-block text-xs">AVAILABLE_FOR_HIRE = true</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-green-500 font-code-block text-xs">VIBE_CHECK = passed</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 right-0 w-[calc(100%-80px)] h-[30px] border-t border-outline-variant bg-surface-container-lowest flex items-center justify-between px-gutter z-40">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-on-surface-variant">© 2024 Rudresh Lagwankar</span>
+<div class="h-3 w-px bg-outline-variant"></div>
+<div class="flex gap-4">
+<span class="font-label-md text-on-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer">UTF-8</span>
+<span class="font-label-md text-on-surface-variant hover:text-primary-fixed-dim transition-colors cursor-pointer flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">fork_right</span> Git:main
+                </span>
+</div>
+</div>
+<div class="flex items-center">
+<span class="font-label-md text-secondary font-bold hover:text-primary-fixed-dim transition-colors cursor-pointer flex items-center gap-2">
+                Available for Hire <span class="w-1.5 h-3 bg-secondary cursor-blink"></span>
+</span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RL_OS | Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-image: 
+                linear-gradient(rgba(0, 220, 229, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 220, 229, 0.03) 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        .terminal-glow {
+            box-shadow: 0 0 12px rgba(0, 220, 229, 0.15);
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#dfe2eb",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "primary-fixed": "#63f7ff",
+                        "on-tertiary-fixed-variant": "#35476a",
+                        "secondary-container": "#6f00be",
+                        "inverse-primary": "#00696e",
+                        "on-secondary": "#490080",
+                        "tertiary-fixed-dim": "#b4c7f0",
+                        "primary-container": "#00f5ff",
+                        "surface-container-high": "#262a31",
+                        "error": "#ffb4ab",
+                        "surface": "#10141a",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#31353c",
+                        "surface-tint": "#00dce5",
+                        "primary": "#e9feff",
+                        "on-background": "#dfe2eb",
+                        "on-primary-fixed": "#002021",
+                        "surface-container": "#1c2026",
+                        "surface-bright": "#353940",
+                        "on-primary-fixed-variant": "#004f53",
+                        "outline": "#849495",
+                        "surface-container-low": "#181c22",
+                        "surface-container-lowest": "#0a0e14",
+                        "on-tertiary-fixed": "#051b3c",
+                        "inverse-on-surface": "#2d3137",
+                        "on-tertiary-container": "#4f6186",
+                        "on-tertiary": "#1d3052",
+                        "tertiary-fixed": "#d8e2ff",
+                        "secondary": "#ddb7ff",
+                        "on-primary-container": "#006c71",
+                        "surface-dim": "#10141a",
+                        "surface-variant": "#31353c",
+                        "on-secondary-container": "#d6a9ff",
+                        "tertiary-container": "#d0ddff",
+                        "error-container": "#93000a",
+                        "background": "#10141a",
+                        "on-surface": "#dfe2eb",
+                        "primary-fixed-dim": "#00dce5",
+                        "outline-variant": "#3a494a",
+                        "tertiary": "#faf9ff",
+                        "on-surface-variant": "#b9caca",
+                        "on-primary": "#003739",
+                        "secondary-fixed": "#f0dbff",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "on-secondary-fixed": "#2c0051"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter": "20px",
+                        "grid-unit": "10px",
+                        "margin-mobile": "16px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["JetBrains Mono"],
+                        "code-block": ["JetBrains Mono"],
+                        "headline-lg": ["JetBrains Mono"],
+                        "body-lg": ["JetBrains Mono"],
+                        "body-sm": ["JetBrains Mono"],
+                        "label-md": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "code-block": ["14px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface overflow-hidden h-screen w-screen flex">
+<!-- SideNavBar Anchor -->
+<aside class="docked fixed left-0 top-0 h-full w-[80px] border-r border-outline-variant bg-surface-container-low flex flex-col items-center py-grid-unit z-50">
+<div class="mb-10 text-center">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim block">RL_OS</span>
+<span class="font-body-sm text-body-sm text-outline">v1.0.4</span>
+</div>
+<nav class="flex flex-col gap-6 w-full">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md mt-1">About</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-label-md text-label-md mt-1">Skills</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="code">code</span>
+<span class="font-label-md text-label-md mt-1">Projects</span>
+</a>
+<!-- ACTIVE: Experience -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim border-l-2 border-primary shadow-[0_0_12px_rgba(0,220,229,0.3)] bg-surface-container-highest py-2" href="#">
+<span class="material-symbols-outlined" data-icon="work" style="font-variation-settings: 'FILL' 1;">work</span>
+<span class="font-label-md text-label-md mt-1">Experience</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-label-md text-label-md mt-1">Contact</span>
+</a>
+</nav>
+<div class="mt-auto w-full border-t border-outline-variant pt-4 flex flex-col gap-4">
+<button class="text-on-surface-variant hover:text-primary flex flex-col items-center">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary flex flex-col items-center mb-4">
+<span class="material-symbols-outlined" data-icon="keyboard_arrow_right">keyboard_arrow_right</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="flex-1 ml-[80px] flex flex-col h-screen">
+<!-- TopAppBar Anchor -->
+<header class="docked fixed top-0 right-0 w-[calc(100%-80px)] h-[40px] border-b border-outline-variant bg-surface-container-high flex items-center justify-between px-gutter z-40">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md text-on-surface dark:text-on-surface">~/rudresh_portfolio</span>
+<nav class="hidden md:flex items-center gap-4 ml-6">
+<span class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest px-2 py-1 cursor-pointer">main.sh</span>
+<span class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-highest px-2 py-1 cursor-pointer">about.md</span>
+<span class="font-label-md text-label-md text-primary dark:text-primary-fixed-dim font-bold px-2 py-1 cursor-pointer">skills.json</span>
+</nav>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm cursor-pointer hover:bg-surface-container-highest p-1" data-icon="minimize">minimize</span>
+<span class="material-symbols-outlined text-outline text-sm cursor-pointer hover:bg-surface-container-highest p-1" data-icon="fullscreen">fullscreen</span>
+<span class="material-symbols-outlined text-outline text-sm cursor-pointer hover:bg-surface-container-highest p-1 text-error" data-icon="close">close</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<div class="flex-1 mt-[40px] mb-[30px] p-gutter overflow-y-auto scroll-hide">
+<div class="max-w-container-max mx-auto space-y-grid-unit">
+<!-- Terminal Card Header -->
+<div class="bg-surface-container-low border border-outline-variant rounded-t overflow-hidden terminal-glow">
+<div class="bg-surface-container-high px-4 py-2 flex justify-between items-center border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-lg" data-icon="terminal">terminal</span>
+<span class="font-code-block text-code-block text-on-surface-variant">experience_log.git</span>
+</div>
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-outline-variant opacity-50"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant opacity-50"></div>
+<div class="w-3 h-3 rounded-full bg-primary-fixed-dim"></div>
+</div>
+</div>
+<div class="p-8 font-code-block text-code-block leading-relaxed">
+<!-- Header / Prompt -->
+<div class="mb-8">
+<p class="text-primary-fixed-dim">guest@rudresh:~$ git log --graph --oneline --decorate</p>
+<p class="text-outline text-xs mt-1">Fetching remote career history...</p>
+</div>
+<!-- Vertical CLI Timeline Container -->
+<div class="relative pl-12">
+<!-- Vertical Line -->
+<div class="absolute left-[20px] top-0 bottom-0 w-px bg-outline-variant"></div>
+<!-- Entry 01 -->
+<div class="relative mb-12 group">
+<!-- Git Node -->
+<div class="absolute left-[-32px] top-1 w-6 h-6 rounded-full bg-surface-container border-2 border-primary-container z-10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00f5ff]"></div>
+</div>
+<div class="space-y-4 bg-surface-container-lowest p-6 border-l-4 border-primary-container">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary-container">commit e7a8d2c (HEAD -&gt; main)</h2>
+<p class="font-body-lg text-body-lg text-on-surface font-bold mt-1">Valueadd Softtech &amp; Systems Pvt. Ltd.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-[#324467] border border-primary-container text-primary-container text-[10px] rounded-full">--software-engineer</span>
+<span class="px-2 py-1 bg-surface-container-high border border-outline-variant text-on-surface-variant text-[10px] rounded-full">Dec 2020 - Present</span>
+</div>
+</div>
+<div class="mt-4 space-y-2 text-on-surface-variant">
+<div class="flex items-start gap-3">
+<span class="text-primary-container">&gt;</span>
+<p>Design and implement highly scalable web applications leveraging modern framework architectures.</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-primary-container">&gt;</span>
+<p>Lead technical coordination with cross-functional teams to align system requirements.</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-primary-container">&gt;</span>
+<p>Conduct rigorous GitHub PR reviews maintaining high standards for code quality and security.</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-primary-container">&gt;</span>
+<p>Architect comprehensive API documentation using Swagger/OpenAPI specifications.</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-primary-container">&gt;</span>
+<p>Manage deployment release notes and system mindmaps for architectural visualization.</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="text-primary-container">&gt;</span>
+<p>Execute deep-level debugging and performance optimization across the full software stack.</p>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant flex items-center gap-4">
+<span class="text-secondary font-bold">Duration: 5.3 Years</span>
+<span class="text-outline">|</span>
+<div class="flex gap-2">
+<span class="text-xs px-2 py-0.5 border border-outline-variant text-outline">#nodejs</span>
+<span class="text-xs px-2 py-0.5 border border-outline-variant text-outline">#reactjs</span>
+<span class="text-xs px-2 py-0.5 border border-outline-variant text-outline">#postgresql</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Entry 02 (Historical Placeholder for Context) -->
+<div class="relative mb-12 opacity-60">
+<div class="absolute left-[-32px] top-1 w-6 h-6 rounded-full bg-surface-container border-2 border-outline-variant z-10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<div class="space-y-2 pl-4">
+<p class="text-on-surface-variant italic">commit a1b2c3d</p>
+<p class="font-body-sm text-body-sm text-on-surface">System Initialization Phase / Internship</p>
+<p class="text-xs text-outline">Jul 2020 - Nov 2020</p>
+</div>
+</div>
+<!-- End of Log -->
+<div class="flex items-center gap-2 mt-12 text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="block">block</span>
+<span>(END)</span>
+<span class="w-2 h-4 bg-primary-container blink ml-2"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Info Panel: Bento Grid Style -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-grid-unit">
+<div class="md:col-span-2 bg-surface-container border border-outline-variant p-6 rounded relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-primary font-bold">--system-metrics</h3>
+<span class="material-symbols-outlined text-outline" data-icon="monitoring">monitoring</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="border border-outline-variant p-4 text-center">
+<p class="text-[10px] text-outline uppercase">Uptime</p>
+<p class="text-headline-md text-primary-container">5.3y</p>
+</div>
+<div class="border border-outline-variant p-4 text-center">
+<p class="text-[10px] text-outline uppercase">PRs Reviewed</p>
+<p class="text-headline-md text-primary-container">1.2k+</p>
+</div>
+<div class="border border-outline-variant p-4 text-center">
+<p class="text-[10px] text-outline uppercase">Apps Shipped</p>
+<p class="text-headline-md text-primary-container">12</p>
+</div>
+<div class="border border-outline-variant p-4 text-center">
+<p class="text-[10px] text-outline uppercase">Status</p>
+<p class="text-headline-md text-primary-container">Active</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-6 rounded flex flex-col justify-center">
+<p class="text-on-surface-variant text-body-sm mb-4">Interested in collaboration or system integration?</p>
+<button class="bg-primary-container text-on-primary-container py-2 font-bold hover:shadow-[0_0_15px_rgba(0,245,255,0.4)] transition-all flex items-center justify-center gap-2">
+<span>&gt; run contact.sh</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Anchor -->
+<footer class="docked fixed bottom-0 right-0 w-[calc(100%-80px)] h-[30px] border-t border-outline-variant bg-surface-container-lowest flex items-center justify-between px-gutter z-40">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md text-on-surface-variant">© 2024 Rudresh Lagwankar</span>
+<span class="text-outline text-xs">|</span>
+<div class="flex gap-4">
+<span class="font-label-md text-label-md text-secondary hover:text-primary cursor-pointer transition-colors blink">Available for Hire</span>
+<span class="font-label-md text-label-md text-on-surface-variant hover:text-primary cursor-pointer transition-colors">Git:main</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md text-on-surface-variant">UTF-8</span>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="cloud_done">cloud_done</span>
+</div>
+</footer>
+</main>
+</body></html>

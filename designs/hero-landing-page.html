@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#ffdad6",
+                    "inverse-surface": "#dfe2eb",
+                    "on-secondary-fixed-variant": "#6900b3",
+                    "primary-fixed": "#63f7ff",
+                    "on-tertiary-fixed-variant": "#35476a",
+                    "secondary-container": "#6f00be",
+                    "inverse-primary": "#00696e",
+                    "on-secondary": "#490080",
+                    "tertiary-fixed-dim": "#b4c7f0",
+                    "primary-container": "#00f5ff",
+                    "surface-container-high": "#262a31",
+                    "error": "#ffb4ab",
+                    "surface": "#10141a",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#31353c",
+                    "surface-tint": "#00dce5",
+                    "primary": "#e9feff",
+                    "on-background": "#dfe2eb",
+                    "on-primary-fixed": "#002021",
+                    "surface-container": "#1c2026",
+                    "surface-bright": "#353940",
+                    "on-primary-fixed-variant": "#004f53",
+                    "outline": "#849495",
+                    "surface-container-low": "#181c22",
+                    "surface-container-lowest": "#0a0e14",
+                    "on-tertiary-fixed": "#051b3c",
+                    "inverse-on-surface": "#2d3137",
+                    "on-tertiary-container": "#4f6186",
+                    "on-tertiary": "#1d3052",
+                    "tertiary-fixed": "#d8e2ff",
+                    "secondary": "#ddb7ff",
+                    "on-primary-container": "#006c71",
+                    "surface-dim": "#10141a",
+                    "surface-variant": "#31353c",
+                    "on-secondary-container": "#d6a9ff",
+                    "tertiary-container": "#d0ddff",
+                    "error-container": "#93000a",
+                    "background": "#10141a",
+                    "on-surface": "#dfe2eb",
+                    "primary-fixed-dim": "#00dce5",
+                    "outline-variant": "#3a494a",
+                    "tertiary": "#faf9ff",
+                    "on-surface-variant": "#b9caca",
+                    "on-primary": "#003739",
+                    "secondary-fixed": "#f0dbff",
+                    "secondary-fixed-dim": "#ddb7ff",
+                    "on-secondary-fixed": "#2c0051"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "gutter": "20px",
+                    "grid-unit": "10px",
+                    "margin-mobile": "16px",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "headline-md": ["JetBrains Mono"],
+                    "code-block": ["JetBrains Mono"],
+                    "headline-lg": ["JetBrains Mono"],
+                    "body-lg": ["JetBrains Mono"],
+                    "body-sm": ["JetBrains Mono"],
+                    "label-md": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "code-block": ["14px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 5;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 220, 229, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(58, 73, 74, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(58, 73, 74, 0.1) 1px, transparent 1px);
+        }
+        .cursor-blink {
+            display: inline-block;
+            width: 12px;
+            height: 1.2em;
+            background-color: #00f5ff;
+            vertical-align: middle;
+            margin-left: 4px;
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .steady-blink {
+            animation: steady-blink 1.5s ease-in-out infinite;
+        }
+        @keyframes steady-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-sm overflow-hidden select-none">
+<div class="fixed inset-0 grid-bg z-0 pointer-events-none"></div>
+<div class="scanline"></div>
+<!-- SideNavBar -->
+<aside class="docked fixed left-0 top-0 h-full w-[80px] border-r border-outline-variant bg-surface-container-low flex flex-col items-center py-grid-unit z-50">
+<div class="mb-gutter">
+<span class="font-headline-md text-headline-md font-bold text-primary-fixed-dim">RL</span>
+</div>
+<nav class="flex flex-col gap-6 flex-1 w-full px-2">
+<a class="flex flex-col items-center justify-center text-primary-fixed-dim border-l-2 border-primary-fixed-dim shadow-[0_0_12px_rgba(0,220,229,0.3)] py-4 hover:bg-surface-container-highest transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-4 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-[10px] mt-1">About</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-4 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-label-md text-[10px] mt-1">Skills</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-4 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="code">code</span>
+<span class="font-label-md text-[10px] mt-1">Projects</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-4 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-label-md text-[10px] mt-1">Experience</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-highest transition-all duration-150 py-4 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-label-md text-[10px] mt-1">Contact</span>
+</a>
+</nav>
+<div class="flex flex-col gap-4 mb-grid-unit">
+<a class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</a>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="docked fixed top-0 right-0 w-[calc(100%-80px)] h-[40px] border-b border-outline-variant bg-surface-container-high flex items-center justify-between px-gutter z-40">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-on-surface">~/rudresh_portfolio</span>
+<div class="flex gap-4 ml-gutter">
+<span class="font-label-md text-primary-fixed-dim font-bold">main.sh</span>
+<span class="font-label-md text-on-surface-variant hover:bg-surface-bright px-2 py-1 rounded cursor-pointer transition-colors">about.md</span>
+<span class="font-label-md text-on-surface-variant hover:bg-surface-bright px-2 py-1 rounded cursor-pointer transition-colors">skills.json</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant cursor-pointer hover:bg-surface-bright p-1" data-icon="minimize">minimize</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant cursor-pointer hover:bg-surface-bright p-1" data-icon="fullscreen">fullscreen</span>
+<span class="material-symbols-outlined text-[18px] text-error cursor-pointer hover:bg-error-container p-1" data-icon="close">close</span>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="ml-[80px] pt-[40px] pb-[30px] h-screen flex items-center justify-center p-gutter relative z-10">
+<!-- Terminal Window Frame -->
+<div class="max-w-[1000px] w-full border border-outline-variant bg-surface-container shadow-2xl overflow-hidden">
+<!-- Window Header -->
+<div class="flex items-center justify-between bg-surface-container-high px-4 py-2 border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-[16px]" data-icon="terminal">terminal</span>
+<span class="font-label-md text-on-surface-variant opacity-70">bash — 80x24</span>
+</div>
+<div class="flex gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-on-error-container opacity-40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-secondary-fixed opacity-40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container opacity-40"></div>
+</div>
+</div>
+<!-- Terminal Content -->
+<div class="p-10 md:p-16 flex flex-col items-start gap-8">
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-secondary-fixed-dim opacity-70 uppercase tracking-widest">Initialization Complete...</span>
+<h1 class="font-headline-lg text-[48px] md:text-[64px] text-primary flex items-center">
+                        Rudresh Lagwankar<span class="cursor-blink"></span>
+</h1>
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="bg-[#324467] border border-primary-fixed-dim text-primary-fixed-dim px-3 py-1 font-label-md rounded-lg">--Software Engineer</span>
+<span class="bg-[#324467] border border-primary-fixed-dim text-primary-fixed-dim px-3 py-1 font-label-md rounded-lg">--5.3 Years Exp</span>
+<span class="bg-[#324467] border border-primary-fixed-dim text-primary-fixed-dim px-3 py-1 font-label-md rounded-lg">--Full Stack</span>
+<span class="bg-[#324467] border border-primary-fixed-dim text-primary-fixed-dim px-3 py-1 font-label-md rounded-lg">--GenAI</span>
+</div>
+</div>
+<div class="w-full max-w-2xl bg-surface-container-low border border-outline-variant p-6 font-code-block text-on-surface-variant relative">
+<div class="absolute -top-3 left-4 bg-surface-container-low px-2 text-[10px] text-outline">INFO_STDOUT</div>
+<p class="text-body-lg flex items-start gap-3">
+<span class="text-primary-fixed-dim font-bold">guest@rudresh:~$</span>
+<span class="text-on-surface">Building scalable web apps · React · Node · NestJS · AI integrations</span>
+</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-6 mt-4">
+<button class="bg-primary-container text-on-primary-container font-label-md px-8 py-4 uppercase tracking-tighter flex items-center gap-2 hover:shadow-[0_0_15px_rgba(0,245,255,0.4)] transition-all active:scale-95 group">
+<span>&gt; run projects.sh</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="keyboard_arrow_right">keyboard_arrow_right</span>
+</button>
+<button class="border border-secondary-fixed-dim text-secondary-fixed-dim hover:bg-secondary/10 font-label-md px-8 py-4 uppercase tracking-tighter flex items-center gap-2 transition-all active:scale-95 group">
+<span>&gt; get resume.pdf</span>
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+</button>
+</div>
+</div>
+<!-- Terminal Footer Status -->
+<div class="bg-surface-container-low px-6 py-2 border-t border-outline-variant flex justify-between items-center opacity-60">
+<div class="flex gap-4 font-label-md text-[10px]">
+<span>UTF-8</span>
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim"></span> SYSTEM_LIVE</span>
+</div>
+<div class="font-label-md text-[10px]">
+                    Ln 1, Col 1 — 100%
+                </div>
+</div>
+</div>
+<!-- Decorative Floating Elements -->
+<div class="absolute top-10 right-10 opacity-20 hidden lg:block">
+<div class="flex flex-col gap-4">
+<div class="w-32 h-1 bg-primary-fixed-dim shadow-[0_0_8px_rgba(0,220,229,1)]"></div>
+<div class="w-24 h-1 bg-secondary-fixed-dim shadow-[0_0_8px_rgba(221,183,255,1)]"></div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="docked fixed bottom-0 right-0 w-[calc(100%-80px)] h-[30px] border-t border-outline-variant bg-surface-container-lowest flex items-center justify-between px-gutter z-40">
+<div class="flex items-center gap-6">
+<span class="font-label-md text-on-surface">© 2024 Rudresh Lagwankar</span>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex gap-4">
+<a class="font-label-md text-secondary-fixed-dim hover:text-primary-fixed-dim transition-colors steady-blink" href="#">Available for Hire</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-code-block text-label-md text-on-surface-variant">Git:main</span>
+<span class="font-code-block text-label-md text-on-surface-variant">UTF-8</span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,454 @@
+I have 6 HTML design files for a portfolio website and a DESIGN.md system spec. Convert all pages into a Next.js 14 App Router project in one go. Preserve every design detail exactly — the DESIGN.md is the source of truth for all design decisions.
+
+## HTML source files
+Place all files in ./designs/ folder:
+- hero-landing-page.html   → app/page.tsx          (route: /)
+- about-section.html       → app/about/page.tsx     (route: /about)
+- skills_tools.html        → app/skills/page.tsx    (route: /skills)
+- projects_gallery.html    → app/projects/page.tsx  (route: /projects)
+- experience-timeline.html → app/experience/page.tsx (route: /experience)
+- contact-footer.html      → app/contact/page.tsx   (route: /contact)
+
+---
+
+## STEP 1 — tailwind.config.ts
+
+Replace entirely with:
+
+```ts
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
+  darkMode: 'class',
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        // Surface scale
+        'surface':                   '#10141a',
+        'surface-dim':               '#10141a',
+        'surface-bright':            '#353940',
+        'surface-container-lowest':  '#0a0e14',
+        'surface-container-low':     '#181c22',
+        'surface-container':         '#1c2026',
+        'surface-container-high':    '#262a31',
+        'surface-container-highest': '#31353c',
+        'surface-variant':           '#31353c',
+        'surface-tint':              '#00dce5',
+        // On-surface
+        'on-surface':         '#dfe2eb',
+        'on-surface-variant': '#b9caca',
+        'inverse-surface':    '#dfe2eb',
+        'inverse-on-surface': '#2d3137',
+        // Outline
+        'outline':         '#849495',
+        'outline-variant': '#3a494a',
+        // Primary (Neon Cyan)
+        'primary':                   '#e9feff',
+        'on-primary':                '#003739',
+        'primary-container':         '#00f5ff',
+        'on-primary-container':      '#006c71',
+        'inverse-primary':           '#00696e',
+        'primary-fixed':             '#63f7ff',
+        'primary-fixed-dim':         '#00dce5',
+        'on-primary-fixed':          '#002021',
+        'on-primary-fixed-variant':  '#004f53',
+        // Secondary (Subtle Purple)
+        'secondary':                  '#ddb7ff',
+        'on-secondary':               '#490080',
+        'secondary-container':        '#6f00be',
+        'on-secondary-container':     '#d6a9ff',
+        'secondary-fixed':            '#f0dbff',
+        'secondary-fixed-dim':        '#ddb7ff',
+        'on-secondary-fixed':         '#2c0051',
+        'on-secondary-fixed-variant': '#6900b3',
+        // Tertiary
+        'tertiary':                  '#faf9ff',
+        'on-tertiary':               '#1d3052',
+        'tertiary-container':        '#d0ddff',
+        'on-tertiary-container':     '#4f6186',
+        'tertiary-fixed':            '#d8e2ff',
+        'tertiary-fixed-dim':        '#b4c7f0',
+        'on-tertiary-fixed':         '#051b3c',
+        'on-tertiary-fixed-variant': '#35476a',
+        // Error
+        'error':              '#ffb4ab',
+        'on-error':           '#690005',
+        'error-container':    '#93000a',
+        'on-error-container': '#ffdad6',
+        // Background
+        'background':    '#10141a',
+        'on-background': '#dfe2eb',
+        // Brand containers (from DESIGN.md fidelity note)
+        'brand-container':     '#324467',
+        'brand-container-dim': '#25334d',
+      },
+      borderRadius: {
+        // From DESIGN.md rounded tokens
+        'sm':      '0.125rem',
+        DEFAULT:   '0.25rem',
+        'md':      '0.375rem',
+        'lg':      '0.5rem',
+        'xl':      '0.75rem',
+        'full':    '9999px',
+        // Terminal windows use 0px radius per DESIGN.md
+        'none':    '0px',
+      },
+      spacing: {
+        'grid-unit':       '10px',
+        'gutter':          '20px',
+        'margin-mobile':   '16px',
+        'margin-desktop':  '40px',
+        'container-max':   '1200px',
+      },
+      fontFamily: {
+        // All levels use JetBrains Mono per DESIGN.md
+        'headline-lg': ['JetBrains Mono', 'monospace'],
+        'headline-md': ['JetBrains Mono', 'monospace'],
+        'body-lg':     ['JetBrains Mono', 'monospace'],
+        'body-sm':     ['JetBrains Mono', 'monospace'],
+        'label-md':    ['JetBrains Mono', 'monospace'],
+        'code-block':  ['JetBrains Mono', 'monospace'],
+      },
+      fontSize: {
+        'headline-lg': ['32px', { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'headline-md': ['24px', { lineHeight: '1.3', fontWeight: '600' }],
+        'body-lg':     ['16px', { lineHeight: '1.6', fontWeight: '400' }],
+        'body-sm':     ['14px', { lineHeight: '1.5', fontWeight: '400' }],
+        'label-md':    ['12px', { lineHeight: '1', letterSpacing: '0.05em', fontWeight: '500' }],
+        'code-block':  ['14px', { lineHeight: '1.7', fontWeight: '400' }],
+      },
+      boxShadow: {
+        // DESIGN.md elevation: glow only, no drop shadows
+        'glow-cyan':   '0 0 12px rgba(0, 245, 255, 0.4)',
+        'glow-purple': '0 0 12px rgba(221, 183, 255, 0.4)',
+        'glow-cyan-sm': '0 0 8px rgba(0, 220, 229, 0.3)',
+        'os-window':   '0 0 40px rgba(0, 0, 0, 0.5)',
+      },
+    },
+  },
+  plugins: [],
+}
+export default config
+```
+
+---
+
+## STEP 2 — app/globals.css
+
+Replace with (keep existing @tailwind directives at top):
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+/*
+  DESIGN.md — Layout: Fixed Technical Grid
+  10px baseline grid. All spacing multiples of 10px.
+*/
+.grid-bg {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(58, 73, 74, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(58, 73, 74, 0.1) 1px, transparent 1px);
+}
+.grid-bg-sm {
+  background-image:
+    linear-gradient(rgba(58, 73, 74, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58, 73, 74, 0.1) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+/* Scanline animation */
+.scanline {
+  width: 100%;
+  height: 100px;
+  z-index: 5;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 220, 229, 0.05) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 0.1;
+  position: fixed;
+  bottom: 100%;
+  pointer-events: none;
+  animation: scanline 8s linear infinite;
+}
+@keyframes scanline {
+  0%   { bottom: 100%; }
+  100% { bottom: -100%; }
+}
+
+/*
+  DESIGN.md — The Cursor
+  Vertical block/bar that blinks at end of headings or active inputs.
+*/
+.cursor-blink {
+  display: inline-block;
+  width: 12px;
+  height: 1.2em;
+  background-color: #00f5ff;
+  vertical-align: middle;
+  margin-left: 4px;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
+  animation: blink 1s step-end infinite;
+}
+.cursor-blink-sm {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background-color: #00dce5;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+@keyframes blink {
+  from, to { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Steady blink for "Available for Hire" footer badge */
+.steady-blink {
+  animation: steady-blink 1.5s ease-in-out infinite;
+}
+@keyframes steady-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/*
+  DESIGN.md — Elevation: Luminescence not shadows
+  Active/focused elements emit a glow using Primary Cyan or Secondary Purple.
+  .terminal-glow is the standard active container glow.
+*/
+.terminal-glow {
+  box-shadow: 0 0 12px rgba(0, 220, 229, 0.15);
+}
+.os-window-shadow {
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+/*
+  DESIGN.md — Glassmorphism
+  Only for transient elements (dropdowns, tooltips).
+  blur(8px) + 10% white tint.
+*/
+.glass {
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/*
+  DESIGN.md — Input Fields
+  Minimalist bottom border only.
+  Cyan (#00f5ff) on focus.
+  Prefix: guest@rudresh:~$
+*/
+.terminal-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #3a494a;
+  border-radius: 0;
+  outline: none;
+  color: #dfe2eb;
+  font-family: 'JetBrains Mono', monospace;
+  transition: border-color 0.2s;
+}
+.terminal-input:focus {
+  border-bottom-color: #00f5ff;
+}
+```
+
+---
+
+## STEP 3 — components/Shell.tsx (Client component)
+
+Create `components/Shell.tsx` as a `'use client'` component. It renders the sidebar nav, top header, and fixed footer. Import it in `app/layout.tsx`.
+
+### Sidebar nav items (in order):
+| Icon | Label | Route |
+|------|-------|-------|
+| home | Home | / |
+| person | About | /about |
+| terminal | Skills | /skills |
+| code | Projects | /projects |
+| work | Experience | /experience |
+| terminal | Contact | /contact |
+
+**Active nav item styling** (from hero-landing-page.html active state):
+text-primary-fixed-dim
+border-l-2 border-primary-fixed-dim
+shadow-[0_0_12px_rgba(0,220,229,0.3)]
+py-4
+Plus filled icon: `style={{ fontVariationSettings: "'FILL' 1" }}`
+
+**Inactive nav item styling**:
+text-on-surface-variant
+hover:text-primary-fixed-dim
+hover:bg-surface-container-highest
+transition-all duration-150
+py-4
+active:scale-95
+
+Use `usePathname()` from `next/navigation` to detect current route.
+
+### Header tab bar — active tab per route:
+| Route | Active tab label |
+|-------|-----------------|
+| / | main.sh |
+| /about | about.md |
+| /skills | skills.json |
+| /projects | projects.sh |
+| /experience | git.log |
+| /contact | contact.env |
+
+Active tab: `text-primary-fixed-dim font-bold`
+Inactive tabs: `text-on-surface-variant hover:bg-surface-bright px-2 py-1 cursor-pointer transition-colors`
+
+### Footer (fixed, same on all pages):
+fixed bottom-0 right-0 w-[calc(100%-80px)] h-[30px]
+border-t border-outline-variant bg-surface-container-lowest
+flex items-center justify-between px-gutter z-40
+font-label-md text-on-surface-variant
+Left side: pulsing cyan dot + "SYSTEM_READY" + "Available for Hire" (.steady-blink)
+Right side: "UTF-8" · "Git:main" · "© 2024 Rudresh Lagwankar"
+
+---
+
+## STEP 4 — app/layout.tsx
+
+```tsx
+import type { Metadata } from 'next'
+import './globals.css'
+import Shell from '@/components/Shell'
+
+export const metadata: Metadata = {
+  title: 'RL_OS // Rudresh Lagwankar',
+  description: 'Software Engineer Portfolio',
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className="dark">
+      <body className="bg-background text-on-surface font-body-sm min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+        <Shell />
+        {children}
+      </body>
+    </html>
+  )
+}
+```
+
+Do NOT use next/font — JetBrains Mono is loaded via Google Fonts in globals.css.
+
+---
+
+## STEP 5 — Convert all 6 pages
+
+Read each HTML file and extract only the `<main>...</main>` content. Convert to JSX. Do not include aside/header/footer in any page — those are in Shell.tsx.
+
+### JSX conversion rules:
+- `class=` → `className=`
+- `for=` → `htmlFor=`
+- Self-close void elements: `<input />`, `<br />`
+- Inline style hyphens: `style={{ fontVariationSettings: "'FILL' 1" }}`
+- Keep ALL Tailwind classes exactly as written — do not modify any className
+- `href="#"` → `<Link href="[correct route]">` using next/link
+
+### DESIGN.md component rules to enforce during conversion:
+
+**Terminal Cards** — every card must have:
+- Window header with filename (top-left) + 3 circle controls (top-right)
+- `rounded-none` on the container (0px radius per DESIGN.md)
+- Thin bottom border separating header from content
+
+**Buttons (Commands)** per DESIGN.md:
+- Primary: `bg-primary-container text-on-primary-container` + `hover:shadow-glow-cyan` — text prefixed with `>`
+- Secondary: ghost with `border border-secondary-fixed-dim text-secondary-fixed-dim hover:bg-secondary/10` — text prefixed with `>`
+- Never use rounded-lg on buttons — use `rounded` (4px) per DESIGN.md "Soft" shape rule
+
+**CLI Badges (Flags)** per DESIGN.md:
+- `bg-brand-container border border-primary-container text-primary-fixed-dim`
+- `rounded-full` (pill shape)
+- Text format: `--flag-name`
+
+**Input fields** per DESIGN.md:
+- Use `.terminal-input` class from globals.css
+- Prefix with `guest@rudresh:~$` span in `text-primary font-bold`
+- Bottom border only, cyan on focus
+
+**Elevation** per DESIGN.md:
+- No `drop-shadow` or `shadow-md/lg` anywhere
+- Active/focused elements only: `.terminal-glow` or `shadow-glow-cyan`
+- Glassmorphism (`.glass`) only on dropdowns/tooltips, nowhere else
+
+### Page-specific notes:
+
+**app/page.tsx (Hero)**
+- `'use client'`
+- Include inside the page (not layout): `<div className="scanline" />` and `<div className="fixed inset-0 grid-bg z-0 pointer-events-none" />`
+- "run projects.sh" button → `<Link href="/projects">`
+- "get resume.pdf" button → `<button>` with download handler placeholder
+
+**app/about/page.tsx**
+- Read @designs/about-section.html, extract `<main>` content
+
+**app/skills/page.tsx**
+- Read @designs/skills_tools.html
+- Page background uses `grid-bg-sm` pattern
+
+**app/projects/page.tsx**
+- Read @designs/projects_gallery.html
+- 2x2 card grid: `grid grid-cols-1 lg:grid-cols-2 gap-0`
+- Each card: `rounded-none` container per DESIGN.md terminal card spec
+
+**app/experience/page.tsx**
+- Read @designs/experience-timeline.html
+- Git-log timeline styling preserved exactly
+
+**app/contact/page.tsx**
+- `'use client'`
+- Read @designs/contact-footer.html
+- Form uses terminal-input styling from globals.css
+- Handle submit with `useState` (loading/success state)
+- Social links: rudresh.fun, GitHub, LinkedIn
+
+---
+
+## STEP 6 — Final verification checklist
+
+- [ ] `tailwind.config.ts` has `brand-container: '#324467'` and `brand-container-dim: '#25334d'`
+- [ ] `tailwind.config.ts` borderRadius matches DESIGN.md exactly (sm/DEFAULT/md/lg/xl/full)
+- [ ] `globals.css` has `.glass` for glassmorphism (dropdowns/tooltips only)
+- [ ] `globals.css` has `.terminal-input` for contact form fields
+- [ ] No traditional box-shadows anywhere — only glow variants
+- [ ] All terminal card containers use `rounded-none` (0px radius)
+- [ ] All buttons have `>` prompt prefix text
+- [ ] All CLI badges use `bg-brand-container border-primary-container rounded-full`
+- [ ] `app/layout.tsx` has `<html className="dark">`
+- [ ] Sidebar active state uses `border-l-2 border-primary-fixed-dim` + glow
+- [ ] Header active tab changes per route
+- [ ] No page has its own sidebar/header/footer
+- [ ] No `next/font` used — JetBrains Mono via Google Fonts import in globals.css
+- [ ] No new npm packages installed
+- [ ] Zero TypeScript errors across all files
