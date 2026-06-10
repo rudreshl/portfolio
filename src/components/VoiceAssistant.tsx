@@ -4,9 +4,36 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
 declare global {
+  interface SpeechRecognitionAlternative {
+    readonly transcript: string
+    readonly confidence: number
+  }
+  interface SpeechRecognitionResult {
+    readonly isFinal: boolean
+    readonly length: number
+    readonly [index: number]: SpeechRecognitionAlternative
+  }
+  interface SpeechRecognitionResultList {
+    readonly length: number
+    readonly [index: number]: SpeechRecognitionResult
+  }
+  interface SpeechRecognitionEvent extends Event {
+    readonly results: SpeechRecognitionResultList
+  }
+  interface SpeechRecognition extends EventTarget {
+    continuous: boolean
+    interimResults: boolean
+    lang: string
+    onresult: ((ev: SpeechRecognitionEvent) => void) | null
+    onerror: ((ev: Event) => void) | null
+    onend: (() => void) | null
+    start(): void
+    stop(): void
+    abort(): void
+  }
   interface Window {
-    SpeechRecognition: typeof SpeechRecognition
-    webkitSpeechRecognition: typeof SpeechRecognition
+    SpeechRecognition: { new(): SpeechRecognition }
+    webkitSpeechRecognition: { new(): SpeechRecognition }
   }
 }
 
