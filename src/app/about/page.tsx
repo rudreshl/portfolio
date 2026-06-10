@@ -1,6 +1,6 @@
 export default function AboutPage() {
   return (
-    <main className="pt-[60px] pb-[30px] min-h-screen overflow-y-auto">
+    <main className="main-offset ml-[64px] pt-[36px] pb-[26px] min-h-screen overflow-y-auto">
       <section className="max-w-container-max mx-auto px-margin-desktop py-margin-desktop">
         <div className="border border-outline-variant bg-surface-container-low overflow-hidden rounded-lg">
           {/* Window Header */}

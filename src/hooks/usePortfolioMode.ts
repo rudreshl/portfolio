@@ -1,31 +1,29 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { create } from 'zustand'
+import { devtools } from 'zustand/middleware'
 
 type Mode = 'voice' | 'traditional' | null
 
+interface ModeState {
+  mode: Mode
+  isDecided: boolean
+  chooseMode: (m: 'voice' | 'traditional') => void
+  resetMode: () => void
+}
+
+// No `persist` — resets on every page refresh intentionally
+const useModeStore = create<ModeState>()(
+  devtools(
+    (set) => ({
+      mode: null,
+      isDecided: false,
+      chooseMode: (m) => set({ mode: m, isDecided: true }),
+      resetMode: () => set({ mode: null, isDecided: false }),
+    }),
+    { name: 'mode-store' }
+  )
+)
+
 export function usePortfolioMode() {
-  const [mode, setMode] = useState<Mode>(null)
-  const [isDecided, setIsDecided] = useState(false)
-
-  useEffect(() => {
-    const stored = localStorage.getItem('rl_portfolio_mode') as Mode
-    if (stored === 'voice' || stored === 'traditional') {
-      setMode(stored)
-      setIsDecided(true)
-    }
-  }, [])
-
-  const chooseMode = (chosen: 'voice' | 'traditional') => {
-    localStorage.setItem('rl_portfolio_mode', chosen)
-    setMode(chosen)
-    setIsDecided(true)
-  }
-
-  const resetMode = () => {
-    localStorage.removeItem('rl_portfolio_mode')
-    setMode(null)
-    setIsDecided(false)
-  }
-
-  return { mode, isDecided, chooseMode, resetMode }
+  return useModeStore()
 }

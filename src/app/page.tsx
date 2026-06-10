@@ -1,20 +1,13 @@
-'use client'
-
 import Link from 'next/link'
-import { usePortfolioMode } from '@/hooks/usePortfolioMode'
-import ModeSelector from '@/components/ModeSelector'
 
 export default function HeroPage() {
-  const { isDecided, chooseMode } = usePortfolioMode()
-
   return (
     <>
-      {!isDecided && <ModeSelector onModeSelected={chooseMode} />}
       <div className="scanline" />
       <div className="fixed inset-0 grid-bg z-0 pointer-events-none" />
-      <main className="pt-[60px] pb-[30px] h-screen flex items-center justify-center p-gutter relative z-10">
+      <main className="main-offset ml-[64px] pt-[36px] pb-[26px] h-screen flex items-center justify-center p-gutter relative z-10">
         {/* Terminal Window Frame */}
-        <div className="max-w-[1000px] w-full border border-outline-variant bg-surface-container shadow-2xl overflow-hidden">
+        <div className="max-w-[1000px] w-full border border-outline-variant bg-surface-container shadow-2xl overflow-hidden mt-36">
           {/* Window Header */}
           <div className="flex items-center justify-between bg-surface-container-high px-4 py-2 border-b border-outline-variant">
             <div className="flex items-center gap-2">

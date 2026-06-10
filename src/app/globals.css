@@ -130,6 +130,18 @@
   --radius: 0.25rem;
 }
 
+/* Global scale-down: matches 80% browser zoom at native 100% */
+html {
+  zoom: 0.8;
+}
+
+/* Counteract zoom on full-screen overlays so they still fill the viewport */
+.mode-selector-overlay {
+  zoom: 1.25; /* 1 / 0.8 */
+  width: 100vw;
+  height: 100vh;
+}
+
 body {
   font-family: 'JetBrains Mono', monospace;
 }
@@ -249,6 +261,15 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Mobile landscape — sidebar collapses to icon-only, offsets shrink to 52px */
+@media (max-width: 1023px) and (orientation: landscape) {
+  .sidebar-nav-label { display: none; }
+  .sidebar-width { width: 52px !important; }
+  .main-offset { margin-left: 52px !important; }
+  .header-offset { left: 52px !important; }
+  .footer-offset { left: 52px !important; }
+}
+
 /* DESIGN.md — Input Fields: bottom border only, cyan on focus */
 .terminal-input {
   background: transparent;
@@ -263,4 +284,32 @@ body {
 
 .terminal-input:focus {
   border-bottom-color: #00f5ff;
+}
+
+/* Mic ring — expands outward when listening */
+@keyframes mic-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.4); }
+  70%  { box-shadow: 0 0 0 10px rgba(0, 245, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 245, 255, 0); }
+}
+.mic-pulse {
+  animation: mic-ring 1.2s ease-out infinite;
+}
+
+/* Hourglass spin — processing state */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.spin-slow {
+  animation: spin-slow 1.5s linear infinite;
+}
+
+/* Floating text entrance */
+@keyframes float-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.float-in {
+  animation: float-in 0.25s ease-out forwards;
 }

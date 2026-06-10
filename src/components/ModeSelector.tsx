@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
+import { Terminal, Mic, Mouse } from 'lucide-react'
 
 const BOOT_LINES = [
   'Initializing RL_OS v1.0.4...',
@@ -32,7 +33,7 @@ export default function ModeSelector({ onModeSelected }: ModeSelectorProps) {
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[200] grid-bg bg-surface-container-lowest flex items-center justify-center px-4 transition-opacity duration-300',
+        'mode-selector-overlay fixed inset-0 z-[200] grid-bg bg-surface-container-lowest flex items-center justify-center px-4 transition-opacity duration-300',
         mounted && !fadingOut ? 'opacity-100' : 'opacity-0'
       )}
     >
@@ -40,7 +41,7 @@ export default function ModeSelector({ onModeSelected }: ModeSelectorProps) {
         {/* Window header */}
         <div className="flex items-center justify-between bg-surface-container-high px-4 py-2 border-b border-outline-variant">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary-fixed-dim text-[16px]">terminal</span>
+            <Terminal className="w-4 h-4 text-primary-fixed-dim" />
             <span className="font-label-md text-on-surface-variant opacity-70">init_session.sh</span>
           </div>
           <div className="flex gap-2">
@@ -91,7 +92,7 @@ export default function ModeSelector({ onModeSelected }: ModeSelectorProps) {
                 onClick={() => handleChoose('voice')}
                 className="border border-outline-variant bg-surface-container p-6 text-left rounded-none hover:border-primary-fixed-dim hover:shadow-[0_0_12px_rgba(0,220,229,0.3)] transition-all duration-200 flex flex-col"
               >
-                <span className="material-symbols-outlined text-[40px] text-primary-fixed-dim">mic</span>
+                <Mic className="w-10 h-10 text-primary-fixed-dim" />
                 <p className="font-label-md text-primary-fixed-dim font-bold mt-3">&gt; voice_mode.sh</p>
                 <p className="font-body-sm text-on-surface-variant mt-2 flex-1">
                   Navigate by speaking. AI assistant guides you through the portfolio.
@@ -106,7 +107,7 @@ export default function ModeSelector({ onModeSelected }: ModeSelectorProps) {
                 onClick={() => handleChoose('traditional')}
                 className="border border-outline-variant bg-surface-container p-6 text-left rounded-none hover:border-secondary-fixed-dim hover:shadow-[0_0_12px_rgba(221,183,255,0.3)] transition-all duration-200 flex flex-col"
               >
-                <span className="material-symbols-outlined text-[40px] text-secondary-fixed-dim">mouse</span>
+                <Mouse className="w-10 h-10 text-secondary-fixed-dim" />
                 <p className="font-label-md text-secondary-fixed-dim font-bold mt-3">&gt; traditional_mode.sh</p>
                 <p className="font-body-sm text-on-surface-variant mt-2 flex-1">
                   Classic browsing. Click and scroll through the portfolio.

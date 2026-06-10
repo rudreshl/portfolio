@@ -2,8 +2,8 @@ import Link from 'next/link'
 
 export default function ExperiencePage() {
   return (
-    <main className="flex-1 flex flex-col h-screen">
-      <div className="flex-1 mt-[60px] mb-[30px] p-gutter overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <main className="fixed top-[36px] bottom-[26px] left-[64px] right-0 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="p-gutter">
         <div className="max-w-container-max mx-auto space-y-grid-unit">
           {/* Terminal Card Header */}
           <div className="bg-surface-container-low border border-outline-variant rounded-t overflow-hidden terminal-glow">
