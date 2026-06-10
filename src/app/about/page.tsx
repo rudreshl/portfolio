@@ -21,11 +21,18 @@ export default function AboutPage() {
             {/* Left column */}
             <div className="md:col-span-4 flex flex-col items-center md:items-start space-y-6">
               <div className="relative group">
-                <div className="w-48 h-48 bg-surface-container-highest border-2 border-primary-fixed-dim flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(0,220,229,0.15)] transition-all group-hover:shadow-[0_0_30px_rgba(0,220,229,0.3)]">
+                <div className="relative w-48 h-48 bg-surface-container-highest border-2 border-primary-fixed-dim overflow-hidden shadow-[0_0_20px_rgba(0,220,229,0.15)] group-hover:shadow-[0_0_30px_rgba(0,220,229,0.3)] transition-shadow duration-500">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt="Rudresh Lagwankar"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    className="absolute inset-0 w-full h-full object-cover grayscale"
+                    src="/rudresh.png"
+                  />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover color-reveal-anim"
                     src="/rudresh.png"
                   />
                 </div>

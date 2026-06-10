@@ -21,6 +21,7 @@ import {
 import { usePortfolioMode } from '@/hooks/usePortfolioMode'
 import VoiceAssistant from './VoiceAssistant'
 import ModeSelector from './ModeSelector'
+import PortraitGuard from './PortraitGuard'
 
 interface NavItem {
   Icon: LucideIcon
@@ -61,6 +62,9 @@ export default function Shell() {
 
   return (
     <>
+      {/* Portrait guard — blocks portrait mobile, prompts rotation */}
+      <PortraitGuard />
+
       {/* Mode selector — shown on every fresh load until user picks */}
       {!isDecided && <ModeSelector onModeSelected={chooseMode} />}
 

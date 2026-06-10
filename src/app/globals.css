@@ -270,6 +270,17 @@ body {
   .footer-offset { left: 52px !important; }
 }
 
+/* About page — color reveal sweeps top-to-bottom over the grayscale base */
+@keyframes colorReveal {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0% 0); }
+}
+
+.color-reveal-anim {
+  clip-path: inset(0 0 100% 0);
+  animation: colorReveal 1.4s ease-in-out 0.5s forwards;
+}
+
 /* DESIGN.md — Input Fields: bottom border only, cyan on focus */
 .terminal-input {
   background: transparent;
@@ -284,6 +295,17 @@ body {
 
 .terminal-input:focus {
   border-bottom-color: #00f5ff;
+}
+
+/* Hide boot sequence on short screens (landscape mobile) so modal fits without scrolling */
+@media (max-height: 500px) {
+  .modal-boot-lines { display: none; }
+}
+
+/* PortraitGuard phone rotation hint */
+@keyframes rotate-hint {
+  0%, 100% { transform: rotate(-15deg); }
+  50%       { transform: rotate(75deg); }
 }
 
 /* Mic ring — expands outward when listening */
