@@ -46,13 +46,13 @@ export default function AboutPage() {
                   <h1 className="font-headline-lg text-headline-lg text-primary tracking-tighter">
                     Rudresh Lagwankar<span className="cursor-blink">█</span>
                   </h1>
-                  <p className="font-code-block text-secondary-fixed-dim text-lg mt-1">&gt; Software Engineer</p>
+                  <p className="font-code-block text-secondary-fixed-dim text-lg mt-1">&gt; Senior Software Engineer</p>
                 </div>
                 <div className="space-y-2 pt-4 border-t border-outline-variant/30">
                   <div className="flex items-center gap-3 justify-center md:justify-start">
                     <span className="font-code-block text-on-surface-variant text-xs">COMPANY:</span>
                     <span className="font-code-block text-primary-fixed bg-on-primary-fixed-variant/30 px-2 py-0.5 rounded border border-primary-fixed-dim/20">
-                      Valueadd Softtech
+                      Rezolve AI (Valueadd Softtech)
                     </span>
                   </div>
                   <div className="flex items-center gap-3 justify-center md:justify-start">
@@ -75,36 +75,103 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="border border-outline-variant p-4 hover:bg-surface-container-highest/50 transition-colors">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="material-symbols-outlined text-secondary text-sm">terminal</span>
-                    <h3 className="font-headline-md text-[16px] text-secondary">Tech Stack</h3>
+              {/* Interests terminal */}
+              <div className="border border-outline-variant bg-surface-container-lowest overflow-hidden">
+                <div className="bg-surface-container px-4 py-2 flex items-center justify-between border-b border-outline-variant">
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-primary-fixed-dim text-sm">terminal</span>
+                    <span className="font-code-block text-[12px] text-on-surface-variant">interests.json</span>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {['--react.js', '--next.js', '--nestjs', '--spring-boot', '--genai'].map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 bg-surface-container-high border border-outline-variant font-code-block text-[11px] text-on-surface-variant"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-outline-variant opacity-50" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-outline-variant opacity-50" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-outline-variant opacity-50" />
                   </div>
                 </div>
+                <div className="p-5 font-code-block text-[12px] leading-relaxed space-y-4">
+                  <p className="text-primary-fixed-dim">
+                    <span className="text-primary">rudresh</span>
+                    <span className="text-on-surface-variant">@life</span>
+                    <span className="text-outline"> ~ </span>
+                    <span className="text-on-surface">cat interests.json</span>
+                  </p>
 
-                <div className="border border-outline-variant p-4 hover:bg-surface-container-highest/50 transition-colors">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="material-symbols-outlined text-primary-fixed-dim text-sm">architecture</span>
-                    <h3 className="font-headline-md text-[16px] text-primary-fixed-dim">Focus</h3>
-                  </div>
+                  {/* adventures */}
                   <div className="space-y-1">
-                    {['Intelligent Systems', 'Scale Architectures'].map((focus) => (
-                      <div key={focus} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary-fixed-dim rounded-full" />
-                        <span className="font-code-block text-[12px] text-on-surface">{focus}</span>
+                    <p className="text-outline">// adventures</p>
+                    <div className="pl-4 space-y-1">
+                      <div className="flex gap-4">
+                        <span className="text-primary-fixed-dim w-36 shrink-0">--scuba-diving</span>
+                        <span className="text-secondary-fixed-dim">exploring underwater worlds</span>
                       </div>
-                    ))}
+                      <div className="flex gap-4">
+                        <span className="text-primary-fixed-dim w-36 shrink-0">--trekking</span>
+                        <span className="text-secondary-fixed-dim">mountains <span className="text-primary">&gt;</span> meetings</span>
+                      </div>
+                      <div className="flex gap-4">
+                        <span className="text-primary-fixed-dim w-36 shrink-0">--exploring</span>
+                        <span className="text-secondary-fixed-dim">always planning the next trip</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* sports */}
+                  <div className="space-y-1">
+                    <p className="text-outline">// sports</p>
+                    <div className="pl-4 space-y-1">
+                      <div className="flex gap-4">
+                        <span className="text-primary-fixed-dim w-36 shrink-0">--cricket</span>
+                        <span className="text-secondary-fixed-dim">watching <span className="text-primary">|</span> living</span>
+                      </div>
+                      <div className="flex gap-4">
+                        <span className="text-primary-fixed-dim w-36 shrink-0">--swimming</span>
+                        <span className="text-secondary-fixed-dim">active</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* currently playing */}
+                  <div className="space-y-1">
+                    <p className="text-outline">// currently playing</p>
+                    <div className="pl-4 space-y-1">
+                      <div className="flex gap-4">
+                        <span className="text-primary-fixed-dim w-36 shrink-0">--song</span>
+                        <span className="text-primary">Eye of the Tiger</span>
+                      </div>
+                      <div className="flex gap-4">
+                        <span className="text-primary-fixed-dim w-36 shrink-0">--artist</span>
+                        <span className="text-primary">Rahul Deshpande</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* on screen */}
+                  <div className="space-y-1">
+                    <p className="text-outline">// on screen</p>
+                    <div className="pl-4">
+                      <div className="flex gap-4">
+                        <span className="text-primary-fixed-dim w-36 shrink-0">--show</span>
+                        <span>
+                          <span className="text-primary">The Office</span>
+                          <span className="text-outline"> // rewatching for the nth time</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* tags */}
+                  <div className="space-y-2">
+                    <p className="text-outline">// tags</p>
+                    <div className="flex flex-wrap gap-2 pl-4">
+                      {['--adventurer', '--outdoor-first', '--ocean-lover', '--cricket-fan', '--office-stan'].map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 border border-primary-fixed-dim/40 text-primary-fixed-dim bg-surface-container-high rounded-full text-[11px]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

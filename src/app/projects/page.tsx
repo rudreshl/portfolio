@@ -1,61 +1,92 @@
-import Link from 'next/link'
-
 const projects = [
   {
-    title: 'Xirify',
-    tags: ['--on-demand', '--full-stack'],
-    icon: 'terminal',
-    description: 'High-performance on-demand service platform connecting local businesses with real-time consumer needs.',
-    role: 'Full Stack Developer',
-    stack: 'React JS, Node JS, MongoDB',
-    stats: 'Team: 12 | Duration: 14mo',
+    id: '01',
+    title: 'Restaurant Application with Voice AI Agent',
+    period: 'Mar 2026 – Present',
+    duration: '3 months',
+    stack: ['React.js', 'PWA', 'Tailwind CSS', 'Redux Toolkit', 'WebRTC', 'LiveKit'],
+    team: '8–10',
+    tags: ['--voice-ai', '--pwa', '--real-time'],
+    icon: 'mic',
+    active: true,
     highlights: [
-      'Real-time tracking enabled via WebSockets',
-      'Geospatial indexing for service discovery',
+      'Developing a responsive Restaurant Management Application integrated with a Voice AI Agent, enabling users to interact via real-time voice commands using WebRTC and LiveKit for low-latency audio streaming.',
+      'Developed reusable React components using React Hooks, Context API, and Redux Toolkit for efficient state management across the application.',
+      'Implemented code splitting and lazy loading techniques to improve application performance and reduce initial load time.',
+      'Built responsive and pixel-perfect user interfaces using React.js, Tailwind CSS, and PWA technologies based on Figma designs.',
+      'Collaborated with backend teams to integrate REST APIs and real-time communication using WebRTC and LiveKit.',
+      "Leveraging LiveKit's WebRTC infrastructure to handle real-time peer-to-peer communication between the Voice AI Agent and end users with minimal latency.",
     ],
-    border: 'border-b border-r',
   },
   {
-    title: 'TCAS',
-    tags: ['--compliance', '--fintech'],
-    icon: 'security',
-    description: 'Enterprise-grade Trade Compliance portal for cross-border transaction monitoring and auditing.',
-    role: 'Full Stack Developer',
-    stack: 'React, Next.js, Spring Boot',
-    stats: 'Team: 8 | Duration: 18mo',
-    highlights: [
-      'Automated multi-region audit logging',
-      'Scalable Java microservices architecture',
-    ],
-    border: 'border-b',
-  },
-  {
-    title: 'Procasa',
-    tags: ['--onboarding', '--team-lead'],
-    icon: 'groups',
-    description: 'Real estate agent onboarding system streamlining the verification and legal workflow for brokers.',
-    role: 'Team Lead',
-    stack: 'Vue JS, JavaScript',
-    stats: 'Team: 5 | Duration: 9mo',
-    highlights: [
-      'Managed end-to-end component library',
-      'Complex state management for 40+ forms',
-    ],
-    border: 'border-r',
-  },
-  {
-    title: 'UMS Portal',
+    id: '02',
+    title: 'University Management System',
+    period: 'Jun 2025 – Mar 2026',
+    duration: '9 months',
+    stack: ['Angular', 'Node.js', 'SQL Server'],
+    team: '5–6',
     tags: ['--edu-tech', '--workflow'],
     icon: 'school',
-    description: 'Workflow management platform for large-scale academic institutions handling enrollment and results.',
-    role: 'Full Stack Developer',
-    stack: 'Angular, Node.js',
-    stats: 'Team: 15 | Duration: 24mo',
+    active: false,
     highlights: [
-      'RESTful API optimization for 50k users',
-      'Legacy system migration to Node environment',
+      'Managed student and admin portals implementing course admissions, enrollment, scheduling, and academic workflow automation.',
+      'Designed and modified database schemas, created and updated stored procedures in SQL Server to support complex academic data models.',
+      'Developed and maintained RESTful APIs connecting front-end and back-end functionalities with high reliability.',
+      'Performed testing, debugging, and code optimization to ensure smooth and reliable application performance.',
     ],
-    border: '',
+  },
+  {
+    id: '03',
+    title: 'Agent Onboarding — Real Estate Agent Management System (Procasa)',
+    period: 'Mar 2024 – Jun 2025',
+    duration: '15 months',
+    stack: ['Vue.js', 'JavaScript'],
+    team: '6–8',
+    tags: ['--onboarding', '--team-lead'],
+    icon: 'groups',
+    active: false,
+    highlights: [
+      'Led a team of 5 developers as Team Lead, driving end-to-end development of a centralized agent onboarding system for a multi-role real estate organization.',
+      'Collaborated with stakeholders to gather requirements and translated them into scalable technical solutions across hierarchical organizational roles.',
+      'Oversaw frontend design implementation, data filtration, API integrations, and code quality while enforcing clean code practices.',
+      'Managed sprint timelines, participated in client meetings, mentored team members, and resolved technical challenges to ensure smooth delivery.',
+    ],
+  },
+  {
+    id: '04',
+    title: 'TCAS — Trade Compliance As a Service',
+    period: 'Jan 2022 – Mar 2024',
+    duration: '26 months',
+    stack: ['React.js', 'Next.js', 'Redux Toolkit', 'Java (Spring Boot)', 'MySQL'],
+    team: '10–12',
+    tags: ['--compliance', '--fintech', '--full-stack'],
+    icon: 'security',
+    active: false,
+    highlights: [
+      'Contributed as Full Stack Developer on a trade compliance portal offering entity screening, commodity classification, license screening, and rules publication services.',
+      'Developed scalable micro-frontend modules using React.js, Next.js, Redux Toolkit, and React Hooks to support enterprise-scale application architecture.',
+      'Improved application performance through lazy loading, code splitting, and component optimization techniques.',
+      'Implemented reusable component architecture and state management patterns for enterprise-scale applications.',
+      'Participated in unit testing and end-to-end testing using Cypress to ensure application reliability.',
+      'Collaborated closely with solution architects and cross-functional teams, participating in client discussions to align technical solutions with business needs.',
+    ],
+  },
+  {
+    id: '05',
+    title: 'Xirify — On-Demand Service & Delivery Platform',
+    period: 'Dec 2020 – Jan 2022',
+    duration: '13 months',
+    stack: ['React.js', 'Node.js', 'MongoDB'],
+    team: '8–10',
+    tags: ['--on-demand', '--full-stack'],
+    icon: 'delivery_dining',
+    active: false,
+    highlights: [
+      'Developed and optimized backend APIs using Node.js and MongoDB for an on-demand service platform connecting customers with local service partners.',
+      'Implemented in-app push notification systems and integrated secure payment gateways to ensure reliable transaction processing.',
+      'Designed and managed database schemas with complex data manipulations to support scalability and high performance.',
+      'Built responsive UI components with data filtration and API integrations on the frontend to enhance the user experience.',
+    ],
   },
 ]
 
@@ -63,8 +94,8 @@ export default function ProjectsPage() {
   return (
     <main className="main-offset ml-[64px] mt-[36px] mb-[26px] p-10 min-h-[calc(100vh-62px)] relative overflow-hidden">
       {/* Background Decoration */}
-      <div className="absolute top-20 right-20 opacity-5 pointer-events-none">
-        <span className="font-headline-lg text-[120px] select-none">PROJECTS.EXE</span>
+      <div className="absolute top-20 right-20 opacity-5 pointer-events-none select-none">
+        <span className="font-headline-lg text-[120px]">PROJECTS.EXE</span>
       </div>
 
       <div className="max-w-[1200px] mx-auto">
@@ -94,50 +125,76 @@ export default function ProjectsPage() {
             </div>
           </div>
 
-          {/* Card Grid 2x2 */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+          {/* Project List */}
+          <div className="divide-y divide-outline-variant">
             {projects.map((project) => (
               <div
-                key={project.title}
-                className={`p-8 ${project.border} border-outline-variant hover:bg-surface-bright transition-colors group`}
+                key={project.id}
+                className="p-8 hover:bg-surface-bright transition-colors group"
               >
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="font-headline-md text-headline-md text-primary mb-1">{project.title}</h3>
-                    <div className="flex gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] px-2 py-0.5 bg-[#324467] border border-primary-fixed-dim text-primary rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                {/* Project Header */}
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-5">
+                  <div className="flex items-start gap-4">
+                    <div className={`shrink-0 w-10 h-10 flex items-center justify-center border ${project.active ? 'border-primary-container bg-[#324467]' : 'border-outline-variant bg-surface-container-high'}`}>
+                      <span className={`material-symbols-outlined text-[20px] ${project.active ? 'text-primary-container' : 'text-on-surface-variant'}`}>
+                        {project.icon}
+                      </span>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-code-block text-[10px] text-outline">[{project.id}]</span>
+                        {project.active && (
+                          <span className="px-2 py-0.5 bg-[#324467] border border-primary-container text-primary-container text-[10px] rounded-full">
+                            ACTIVE
+                          </span>
+                        )}
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] px-2 py-0.5 bg-surface-container-high border border-outline-variant text-on-surface-variant rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className={`font-headline-md text-headline-md leading-snug ${project.active ? 'text-primary' : 'text-on-surface'}`}>
+                        {project.title}
+                      </h3>
                     </div>
                   </div>
-                  <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">
-                    {project.icon}
-                  </span>
+                  <div className="flex flex-wrap gap-2 shrink-0 md:text-right">
+                    <span className="px-2 py-1 border border-outline-variant text-on-surface-variant text-[10px] font-code-block rounded-full">
+                      {project.period}
+                    </span>
+                    <span className="px-2 py-1 border border-outline-variant text-on-surface-variant text-[10px] font-code-block rounded-full">
+                      {project.duration}
+                    </span>
+                    <span className="px-2 py-1 border border-outline-variant text-on-surface-variant text-[10px] font-code-block rounded-full">
+                      team: {project.team}
+                    </span>
+                  </div>
                 </div>
-                <p className="font-body-sm text-on-surface-variant mb-6">{project.description}</p>
-                <div className="bg-surface-container-lowest p-4 rounded border border-outline-variant font-code-block text-code-block space-y-1">
-                  <div className="flex gap-2">
-                    <span className="text-primary-fixed-dim">ROLE:</span>
-                    <span>{project.role}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <span className="text-primary-fixed-dim">STACK:</span>
-                    <span>{project.stack}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <span className="text-primary-fixed-dim">STATS:</span>
-                    <span>{project.stats}</span>
-                  </div>
-                  <div className="mt-2 text-secondary-fixed-dim border-t border-outline-variant pt-2">
-                    {project.highlights.map((h) => (
-                      <div key={h}>&gt; {h}</div>
-                    ))}
-                  </div>
+
+                {/* Stack Tags */}
+                <div className="flex flex-wrap gap-2 mb-5 pl-14">
+                  {project.stack.map((s) => (
+                    <span
+                      key={s}
+                      className="px-2 py-0.5 bg-surface-container-lowest border border-outline-variant text-on-surface-variant text-[11px] font-code-block"
+                    >
+                      --{s}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Highlights */}
+                <div className="pl-14 space-y-2 font-code-block text-[13px] text-on-surface-variant">
+                  {project.highlights.map((item) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <span className={`shrink-0 mt-0.5 ${project.active ? 'text-primary-container' : 'text-outline'}`}>&gt;</span>
+                      <p className="leading-relaxed">{item}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
@@ -148,7 +205,7 @@ export default function ProjectsPage() {
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-primary-container" /> System Online
             </div>
-            <div className="flex items-center gap-1">Projects: 4</div>
+            <div className="flex items-center gap-1">Projects: 5</div>
             <div className="flex items-center gap-1">Load: 0.24ms</div>
             <div className="ml-auto">UTF-8</div>
           </div>
