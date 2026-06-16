@@ -110,10 +110,14 @@ export default function AboutPage() {
               </div>
 
               <div className="pt-4">
-                <button className="bg-primary-container text-on-primary-container font-code-block font-bold py-3 px-8 hover:shadow-[0_0_15px_rgba(0,245,255,0.4)] transition-all active:scale-95 flex items-center gap-2">
+                <a
+                  href="/resume.pdf"
+                  download="Rudresh_Lagwankar_Resume.pdf"
+                  className="bg-primary-container text-on-primary-container font-code-block font-bold py-3 px-8 hover:shadow-[0_0_15px_rgba(0,245,255,0.4)] transition-all active:scale-95 flex items-center gap-2"
+                >
                   <span className="material-symbols-outlined text-[20px]">download</span>
                   &gt; fetch_resume.pdf
-                </button>
+                </a>
               </div>
             </div>
           </div>

@@ -1,21 +1,30 @@
-'use client'
-
-import { useState } from 'react'
-
 export default function ContactPage() {
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email || !message) return
-    setLoading(true)
-    await new Promise((r) => setTimeout(r, 1200))
-    setLoading(false)
-    setSuccess(true)
-  }
+  const links = [
+    {
+      icon: 'alternate_email',
+      label: 'EMAIL',
+      display: 'rudralagwankar@gmail.com',
+      href: 'mailto:rudralagwankar@gmail.com',
+    },
+    {
+      icon: 'language',
+      label: 'PORTFOLIO',
+      display: 'www.rudresh.fun',
+      href: 'https://www.rudresh.fun',
+    },
+    {
+      icon: 'link',
+      label: 'LINKEDIN',
+      display: 'linkedin.com/in/rudreshlagwankar',
+      href: 'https://linkedin.com/in/rudreshlagwankar',
+    },
+    {
+      icon: 'code',
+      label: 'GITHUB',
+      display: 'github.com/rudreshl',
+      href: 'https://github.com/rudreshl',
+    },
+  ]
 
   return (
     <main className="main-offset ml-[64px] mt-[36px] mb-[26px] flex-grow flex items-center justify-center p-gutter min-h-[calc(100vh-62px)]">
@@ -45,55 +54,29 @@ export default function ContactPage() {
               </p>
             </div>
 
-            {/* Form */}
-            <form className="space-y-8" onSubmit={handleSubmit}>
-              <div className="relative group">
-                <div className="flex items-center gap-2 mb-2 opacity-50 text-label-md">
-                  <span className="material-symbols-outlined text-xs">alternate_email</span>
-                  <span>INPUT_EMAIL</span>
-                </div>
-                <div className="flex items-center gap-3 border-b border-outline-variant focus-within:border-primary-container transition-colors duration-300 pb-2">
-                  <span className="text-primary font-bold">guest@rudresh:~$</span>
-                  <input
-                    className="bg-transparent border-none focus:ring-0 focus:outline-none text-on-surface w-full p-0 font-code-block placeholder:opacity-30"
-                    placeholder="enter your email..."
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="relative group">
-                <div className="flex items-center gap-2 mb-2 opacity-50 text-label-md">
-                  <span className="material-symbols-outlined text-xs">chat_bubble</span>
-                  <span>INPUT_MESSAGE</span>
-                </div>
-                <div className="flex items-start gap-3 border-b border-outline-variant focus-within:border-primary-container transition-colors duration-300 pb-2">
-                  <span className="text-primary font-bold mt-0.5">&gt;</span>
-                  <textarea
-                    className="bg-transparent border-none focus:ring-0 focus:outline-none text-on-surface w-full p-0 font-code-block placeholder:opacity-30 resize-none"
-                    placeholder="how can I help you today?"
-                    rows={3}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-
-              <button
-                className="group flex items-center gap-3 px-6 py-3 bg-primary text-on-primary font-bold terminal-glow hover:bg-primary-fixed hover:scale-[0.98] transition-all disabled:opacity-60"
-                type="submit"
-                disabled={loading || success}
-              >
-                <span className="material-symbols-outlined">send</span>
-                <span className="font-code-block">
-                  {loading ? '--deploying_message...' : success ? '--message_sent!' : '--run deploy_message'}
-                </span>
-              </button>
-            </form>
+            {/* Links */}
+            <div className="space-y-6">
+              {links.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target={item.href.startsWith('mailto') ? undefined : '_blank'}
+                  rel={item.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                  className="group block"
+                >
+                  <div className="flex items-center gap-2 mb-2 opacity-50 text-label-md">
+                    <span className="material-symbols-outlined text-xs">{item.icon}</span>
+                    <span>{item.label}</span>
+                  </div>
+                  <div className="flex items-center gap-3 border-b border-outline-variant group-hover:border-primary-container transition-colors duration-300 pb-2">
+                    <span className="text-primary font-bold shrink-0">rudresh@portfolio:~$</span>
+                    <span className="font-code-block text-on-surface group-hover:text-primary transition-colors duration-300">
+                      {item.display}
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
 
             {/* Visual Accent */}
             <div className="pt-8 border-t border-outline-variant grid grid-cols-3 gap-4">
@@ -115,7 +98,7 @@ export default function ContactPage() {
         <div className="mt-12 flex justify-center gap-8">
           <a
             className="flex flex-col items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group"
-            href="https://rudresh.fun"
+            href="https://www.rudresh.fun"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -124,7 +107,7 @@ export default function ContactPage() {
           </a>
           <a
             className="flex flex-col items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group"
-            href="https://github.com"
+            href="https://github.com/rudreshl"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -133,7 +116,7 @@ export default function ContactPage() {
           </a>
           <a
             className="flex flex-col items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group"
-            href="https://linkedin.com"
+            href="https://linkedin.com/in/rudreshlagwankar"
             target="_blank"
             rel="noopener noreferrer"
           >

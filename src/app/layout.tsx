@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import Shell from '@/components/Shell'
 
+const BASE_URL = 'https://www.rudresh.fun'
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -10,14 +12,80 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'RL_OS // Rudresh Lagwankar',
-  description: 'Software Engineer Portfolio',
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: 'Rudresh Lagwankar — Software Engineer',
+    template: '%s | Rudresh Lagwankar',
+  },
+  description:
+    'Software Engineer with 5+ years of experience building full-stack applications with React.js, Next.js, NestJS, Node.js, Java Spring Boot, and GenAI integrations.',
+  keywords: [
+    'Rudresh Lagwankar',
+    'rudresh lagwankar',
+    'rudreshlagwankar',
+    'Software Engineer',
+    'Full Stack Developer',
+    'React Developer',
+    'Next.js Developer',
+    'NestJS',
+    'Spring Boot',
+    'GenAI',
+    'Portfolio',
+    'rudresh.fun',
+  ],
+  authors: [{ name: 'Rudresh Lagwankar', url: BASE_URL }],
+  creator: 'Rudresh Lagwankar',
+  publisher: 'Rudresh Lagwankar',
+  alternates: { canonical: BASE_URL },
+  openGraph: {
+    type: 'website',
+    url: BASE_URL,
+    siteName: 'Rudresh Lagwankar',
+    title: 'Rudresh Lagwankar — Software Engineer',
+    description:
+      'Software Engineer with 5+ years building full-stack apps with React, Next.js, NestJS, Spring Boot & GenAI.',
+    images: [{ url: '/rudresh.png', width: 800, height: 800, alt: 'Rudresh Lagwankar' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rudresh Lagwankar — Software Engineer',
+    description:
+      'Software Engineer with 5+ years building full-stack apps with React, Next.js, NestJS, Spring Boot & GenAI.',
+    images: ['/rudresh.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Rudresh Lagwankar',
+  url: BASE_URL,
+  email: 'rudralagwankar@gmail.com',
+  jobTitle: 'Software Engineer',
+  worksFor: { '@type': 'Organization', name: 'Valueadd Softtech' },
+  sameAs: [
+    'https://linkedin.com/in/rudreshlagwankar',
+    'https://github.com/rudreshl',
+  ],
+  knowsAbout: [
+    'React.js', 'Next.js', 'NestJS', 'Node.js', 'JavaScript', 'TypeScript',
+    'Java', 'Spring Boot', 'MongoDB', 'PostgreSQL', 'GenAI', 'Full Stack Development',
+  ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {/* Preconnect to Google Fonts CDN early — reduces icon/font load latency */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -32,6 +100,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-background text-on-surface font-body-sm min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+        <div className="scanline" />
+        <div className="fixed inset-0 grid-bg z-0 pointer-events-none" />
         <Shell />
         {children}
       </body>

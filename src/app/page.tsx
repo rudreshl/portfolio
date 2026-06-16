@@ -3,8 +3,6 @@ import Link from 'next/link'
 export default function HeroPage() {
   return (
     <>
-      <div className="scanline" />
-      <div className="fixed inset-0 grid-bg z-0 pointer-events-none" />
       <main className="main-offset ml-[64px] pt-[36px] pb-[26px] h-screen flex items-center justify-center p-gutter relative z-10">
         {/* Terminal Window Frame */}
         <div className="max-w-[1000px] w-full border border-outline-variant bg-surface-container shadow-2xl overflow-hidden mt-36">
@@ -68,10 +66,14 @@ export default function HeroPage() {
                   keyboard_arrow_right
                 </span>
               </Link>
-              <button className="border border-secondary-fixed-dim text-secondary-fixed-dim hover:bg-secondary/10 font-label-md px-8 py-4 uppercase tracking-tighter flex items-center gap-2 transition-all active:scale-95">
+              <a
+                href="/resume.pdf"
+                download="Rudresh_Lagwankar_Resume.pdf"
+                className="border border-secondary-fixed-dim text-secondary-fixed-dim hover:bg-secondary/10 font-label-md px-8 py-4 uppercase tracking-tighter flex items-center gap-2 transition-all active:scale-95"
+              >
                 <span>&gt; get resume.pdf</span>
                 <span className="material-symbols-outlined text-sm">download</span>
-              </button>
+              </a>
             </div>
           </div>
 

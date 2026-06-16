@@ -61,7 +61,7 @@ const projects = [
 
 export default function ProjectsPage() {
   return (
-    <main className="main-offset ml-[64px] mt-[36px] mb-[26px] p-10 min-h-[calc(100vh-62px)] bg-surface-dim relative overflow-hidden">
+    <main className="main-offset ml-[64px] mt-[36px] mb-[26px] p-10 min-h-[calc(100vh-62px)] relative overflow-hidden">
       {/* Background Decoration */}
       <div className="absolute top-20 right-20 opacity-5 pointer-events-none">
         <span className="font-headline-lg text-[120px] select-none">PROJECTS.EXE</span>
@@ -155,10 +155,14 @@ export default function ProjectsPage() {
         </div>
 
         <div className="mt-12 flex justify-center">
-          <button className="bg-primary-container text-on-primary-container px-8 py-3 font-headline-md text-[14px] flex items-center gap-2 hover:shadow-[0_0_12px_#00f5ff] transition-all active:scale-95">
+          <a
+            href="/resume.pdf"
+            download="Rudresh_Lagwankar_Resume.pdf"
+            className="bg-primary-container text-on-primary-container px-8 py-3 font-headline-md text-[14px] flex items-center gap-2 hover:shadow-[0_0_12px_#00f5ff] transition-all active:scale-95"
+          >
             <span className="material-symbols-outlined">download</span>
             &gt; DOWNLOAD_RESUME.PDF
-          </button>
+          </a>
         </div>
       </div>
     </main>
