@@ -67,7 +67,7 @@ export default function HeroPage() {
                 </span>
               </Link>
               <a
-                href="/resume.pdf"
+                href="/Rudresh_Lagwankar_Resume.pdf"
                 download="Rudresh_Lagwankar_Resume.pdf"
                 className="border border-secondary-fixed-dim text-secondary-fixed-dim hover:bg-secondary/10 font-label-md px-8 py-4 uppercase tracking-tighter flex items-center gap-2 transition-all active:scale-95"
               >

@@ -213,7 +213,7 @@ export default function ProjectsPage() {
 
         <div className="mt-12 flex justify-center">
           <a
-            href="/resume.pdf"
+            href="Rudresh_Lagwankar_Resume.pdf"
             download="Rudresh_Lagwankar_Resume.pdf"
             className="bg-primary-container text-on-primary-container px-8 py-3 font-headline-md text-[14px] flex items-center gap-2 hover:shadow-[0_0_12px_#00f5ff] transition-all active:scale-95"
           >

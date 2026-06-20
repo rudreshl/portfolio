@@ -178,7 +178,7 @@ export default function AboutPage() {
 
               <div className="pt-4">
                 <a
-                  href="/resume.pdf"
+                  href="/Rudresh_Lagwankar_Resume.pdf"
                   download="Rudresh_Lagwankar_Resume.pdf"
                   className="bg-primary-container text-on-primary-container font-code-block font-bold py-3 px-8 hover:shadow-[0_0_15px_rgba(0,245,255,0.4)] transition-all active:scale-95 flex items-center gap-2"
                 >
