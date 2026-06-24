@@ -109,7 +109,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=block"
         />
       </head>
-      <body className="bg-background text-on-surface font-body-sm min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+      <body className="bg-background text-on-surface font-body-sm min-h-svh selection:bg-primary-container selection:text-on-primary-container">
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

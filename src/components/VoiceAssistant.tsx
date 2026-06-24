@@ -294,11 +294,30 @@ export default function VoiceAssistant() {
     }
   }, [])
 
-  // Auto-start listening once permission granted in voice mode
+  // Auto-start listening once permission granted in voice mode.
+  // Waits for any ongoing TTS (e.g. the welcome greeting) to finish before
+  // opening the mic — otherwise recognition picks up the speaker audio and
+  // immediately cancels the greeting with a fallback reply.
   useEffect(() => {
     if (micPermission !== 'granted' || mode !== 'voice') return
     isActiveRef.current = true
-    try { recognitionRef.current?.start() } catch { /* noop */ }
+
+    const tryStart = () => {
+      if (!isActiveRef.current) return
+      try { recognitionRef.current?.start() } catch { /* noop */ }
+    }
+
+    if (typeof window !== 'undefined' && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
+      const poll = setInterval(() => {
+        if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
+          clearInterval(poll)
+          tryStart()
+        }
+      }, 100)
+      return () => clearInterval(poll)
+    }
+
+    tryStart()
   }, [micPermission, mode])
 
   // Stop listening when switching away from voice mode

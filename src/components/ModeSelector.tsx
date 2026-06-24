@@ -3,7 +3,9 @@
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { Terminal, Mic, Mouse } from 'lucide-react'
+import { speak } from '@/lib/speech'
 
+const GREETING = "Hello, I am Rudresh. Welcome to my portfolio website. You can ask me to navigate to pages like About, Projects, Skills, Experience, or Contact.";
 const BOOT_LINES = [
   'Initializing RL_OS v1.0.4...',
   'Loading kernel modules...',
@@ -35,6 +37,7 @@ export default function ModeSelector({ onModeSelected }: ModeSelectorProps) {
   }, [])
 
   const handleChoose = (mode: 'voice' | 'traditional') => {
+    speak(GREETING)
     setFadingOut(true)
     setTimeout(() => onModeSelected(mode), 300)
   }

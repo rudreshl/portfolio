@@ -70,62 +70,78 @@ export default function ExperiencePage() {
               </div>
 
               {/* Timeline */}
-              <div className="relative pl-12">
-                <div className="absolute left-[20px] top-0 bottom-0 w-px bg-outline-variant" />
-
-                {jobs.map((job) => (
-                  <div key={job.commit} className="relative mb-10 group">
-                    {/* Node */}
-                    <div className={`absolute left-[-32px] top-1.5 w-6 h-6 rounded-full bg-surface-container z-10 flex items-center justify-center ${job.head ? 'border-2 border-primary-container' : 'border-2 border-outline-variant'}`}>
-                      <div className={`w-2 h-2 rounded-full ${job.head ? 'bg-primary-container shadow-[0_0_8px_#00f5ff]' : 'bg-outline-variant'}`} />
+              <div>
+                {jobs.map((job, idx) => (
+                  <div key={job.commit} className="flex">
+                    {/* ASCII graph rail */}
+                    <div className="flex flex-col items-center w-3.5 shrink-0 mr-5 select-none">
+                      <span className={`text-sm leading-none ${job.head ? 'text-primary-fixed-dim drop-shadow-[0_0_6px_rgba(0,220,229,0.9)]' : 'text-outline'}`}>*</span>
+                      {idx < jobs.length - 1 && (
+                        <div className="w-px flex-1 mt-1.5 bg-outline-variant" />
+                      )}
                     </div>
 
-                    <div className={`space-y-4 bg-surface-container-lowest p-6 border-l-4 ${job.head ? 'border-primary-container' : 'border-outline-variant'}`}>
-                      {/* Header */}
-                      <div className="flex flex-col md:flex-row md:items-start justify-between gap-3">
-                        <div>
-                          <p className={`text-xs mb-1 ${job.head ? 'text-primary-container' : 'text-outline'}`}>
-                            commit {job.commit}{job.head ? ' (HEAD → main)' : ''}
-                          </p>
-                          <h2 className="font-headline-md text-headline-md text-on-surface">{job.role}</h2>
-                          <p className={`font-body-lg text-body-lg font-bold mt-0.5 ${job.head ? 'text-primary' : 'text-on-surface-variant'}`}>
-                            {job.company}
-                          </p>
-                          <p className="text-xs text-outline mt-0.5">{job.location}</p>
-                        </div>
-                        <div className="flex flex-wrap gap-2 shrink-0">
-                          <span className={`px-2 py-1 border text-[10px] rounded-full ${job.head ? 'bg-[#324467] border-primary-container text-primary-container' : 'border-outline-variant text-on-surface-variant'}`}>
-                            {job.period}
+                    {/* Content */}
+                    <div className="flex-1 pb-10">
+                      {/* Commit line */}
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-3">
+                        <span className="text-outline text-xs">commit</span>
+                        <span className={`text-xs font-bold ${job.head ? 'text-primary-container' : 'text-on-surface-variant'}`}>
+                          {job.commit}
+                        </span>
+                        {job.head && (
+                          <span className="text-[10px] px-1.5 py-px border border-primary-container text-primary-container">
+                            HEAD → main
                           </span>
-                          <span className="px-2 py-1 bg-surface-container border border-outline-variant text-on-surface-variant text-[10px] rounded-full">
-                            {job.duration}
-                          </span>
-                        </div>
+                        )}
                       </div>
 
-                      {/* Description */}
-                      <div className="flex items-start gap-3 text-on-surface-variant">
-                        <span className={`shrink-0 ${job.head ? 'text-primary-container' : 'text-outline'}`}>&gt;</span>
-                        <p className="text-[13px] leading-relaxed">{job.description}</p>
-                      </div>
+                      {/* Card */}
+                      <div className={`border p-5 space-y-4 ${job.head ? 'border-primary-container/50 shadow-[inset_0_0_24px_rgba(0,220,229,0.04)]' : 'border-outline-variant'}`}>
+                        <div className="flex flex-col md:flex-row md:items-start justify-between gap-3">
+                          <div>
+                            <h2 className="font-headline-md text-headline-md text-on-surface">{job.role}</h2>
+                            <p className={`font-body-lg text-body-lg font-bold mt-0.5 ${job.head ? 'text-primary' : 'text-on-surface-variant'}`}>
+                              {job.company}
+                            </p>
+                            <p className="text-xs text-outline mt-0.5">{job.location}</p>
+                          </div>
+                          <div className="flex flex-wrap gap-2 shrink-0">
+                            <span className={`px-2 py-1 border text-[10px] rounded-full ${job.head ? 'bg-brand-container border-primary-container text-primary-container' : 'border-outline-variant text-on-surface-variant'}`}>
+                              {job.period}
+                            </span>
+                            <span className="px-2 py-1 bg-surface-container border border-outline-variant text-on-surface-variant text-[10px] rounded-full">
+                              {job.duration}
+                            </span>
+                          </div>
+                        </div>
 
-                      {/* Stack */}
-                      <div className="flex flex-wrap gap-2 pt-1">
-                        {job.stack.map((s) => (
-                          <span key={s} className="px-2 py-0.5 bg-surface-container-high border border-outline-variant text-on-surface-variant text-[10px]">
-                            --{s}
-                          </span>
-                        ))}
+                        <div className="flex items-start gap-3 text-on-surface-variant">
+                          <span className={`shrink-0 font-bold ${job.head ? 'text-primary-container' : 'text-outline'}`}>&gt;</span>
+                          <p className="text-[13px] leading-relaxed">{job.description}</p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          {job.stack.map((s) => (
+                            <span key={s} className="px-2 py-0.5 bg-surface-container-high border border-outline-variant text-on-surface-variant text-[10px]">
+                              --{s}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
                 ))}
 
-                {/* End of Log */}
-                <div className="flex items-center gap-2 mt-4 text-outline">
-                  <span className="material-symbols-outlined text-sm">block</span>
-                  <span>(END)</span>
-                  <span className="w-2 h-4 bg-primary-container cursor-blink ml-2" />
+                {/* End of log */}
+                <div className="flex items-center mt-2 text-outline">
+                  <div className="w-3.5 shrink-0 mr-5 flex justify-center">
+                    <span className="material-symbols-outlined text-sm">block</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span>(END)</span>
+                    <span className="w-2 h-4 bg-primary-container cursor-blink ml-1" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -140,7 +156,7 @@ export default function ExperiencePage() {
             <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {awards.map((award) => (
                 <div key={award.title} className="flex items-start gap-4 p-5 border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-highest/40 transition-colors">
-                  <div className="w-10 h-10 shrink-0 flex items-center justify-center border border-primary-container bg-[#324467]">
+                  <div className="w-10 h-10 shrink-0 flex items-center justify-center border border-primary-container bg-brand-container">
                     <span className="material-symbols-outlined text-primary-container text-[20px]">{award.icon}</span>
                   </div>
                   <div>

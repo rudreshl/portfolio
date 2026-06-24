@@ -1,9 +1,11 @@
+"use client"
 import Link from 'next/link'
 
 export default function HeroPage() {
+
   return (
     <>
-      <main className="main-offset ml-[64px] pt-[36px] pb-[26px] h-screen flex items-center justify-center p-gutter relative z-10">
+      <main className="main-offset ml-[64px] pt-[36px] pb-[26px] h-svh flex items-center justify-center p-gutter relative z-10">
         {/* Terminal Window Frame */}
         <div className="max-w-[1000px] w-full border border-outline-variant bg-surface-container shadow-2xl overflow-hidden mt-36">
           {/* Window Header */}
@@ -97,6 +99,8 @@ export default function HeroPage() {
             <div className="w-24 h-1 bg-secondary-fixed-dim shadow-[0_0_8px_rgba(221,183,255,1)]" />
           </div>
         </div>
+
+
       </main>
     </>
   )
